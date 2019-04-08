@@ -10748,3 +10748,11 @@ header.masthead h1 {
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
 }
+
+.site-logo {
+    height: 50px;
+}
+
+.favorite-icon {
+  height: 32px;
+}

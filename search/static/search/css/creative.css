@@ -6908,53 +6908,53 @@ a.close.disabled {
   vertical-align: text-top !important;
 }
 
-.bg-primary {
-  background-color: #f4623a !important;
+.bg-rooibos {
+  background-color: #c45525 !important;
 }
 
-a.bg-primary:hover, a.bg-primary:focus,
-button.bg-primary:hover,
-button.bg-primary:focus {
+a.bg-rooibos:hover, a.bg-rooibos:focus,
+button.bg-rooibos:hover,
+button.bg-rooibos:focus {
   background-color: #ee3e0d !important;
 }
 
-.bg-secondary {
-  background-color: #6c757d !important;
+.bg-moule {
+  background-color: #345a61 !important;
 }
 
-a.bg-secondary:hover, a.bg-secondary:focus,
-button.bg-secondary:hover,
-button.bg-secondary:focus {
+a.bg-moule:hover, a.bg-moule:focus,
+button.bg-moule:hover,
+button.bg-moule:focus {
   background-color: #545b62 !important;
 }
 
-.bg-success {
-  background-color: #28a745 !important;
+.bg-bonbon {
+  background-color: #86ebe6 !important;
 }
 
-a.bg-success:hover, a.bg-success:focus,
-button.bg-success:hover,
-button.bg-success:focus {
+a.bg-bonbon:hover, a.bg-bonbon:focus,
+button.bg-bonbon:hover,
+button.bg-bonbon:focus {
   background-color: #1e7e34 !important;
 }
 
-.bg-info {
-  background-color: #17a2b8 !important;
+.bg-caramel {
+  background-color: #de9440 !important;
 }
 
-a.bg-info:hover, a.bg-info:focus,
-button.bg-info:hover,
-button.bg-info:focus {
+a.bg-caramel:hover, a.bg-caramel:focus,
+button.bg-caramel:hover,
+button.bg-caramel:focus {
   background-color: #117a8b !important;
 }
 
-.bg-warning {
-  background-color: #ffc107 !important;
+.bg-biscuit {
+  background-color: #e8a75d !important;
 }
 
-a.bg-warning:hover, a.bg-warning:focus,
-button.bg-warning:hover,
-button.bg-warning:focus {
+a.bg-biscuit:hover, a.bg-biscuit:focus,
+button.bg-biscuit:hover,
+button.bg-biscuit:focus {
   background-color: #d39e00 !important;
 }
 

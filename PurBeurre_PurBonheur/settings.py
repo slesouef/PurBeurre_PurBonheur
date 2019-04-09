@@ -20,12 +20,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g#3k3b!aopvv*)kv^nwx53fb=fy(^k366bwl)s7x!xh^)py4ap'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'g#3k3b!aopvv*)kv^nwx53fb=fy('
+                             '^k366bwl)s7x!xh^)py4ap')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('ENV') == 'PRODUCTION':
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['purbeurre-search.herokuapp.com']
 
 
 # Application definition
@@ -74,16 +78,21 @@ WSGI_APPLICATION = 'PurBeurre_PurBonheur.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'OFFProducts',
-        'USER': 'sebastien',
-        'PASSWORD': 'sebastien',
-        'HOST': 'localhost',
-        'PORT': '5432'
+if os.environ.get('ENV') == 'PRODUCTION':
+    DATABASES = {
+        'default': {}
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'OFFProducts',
+            'USER': 'sebastien',
+            'PASSWORD': 'sebastien',
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
+    }
 
 
 # Password validation

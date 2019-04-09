@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'PurBeurre_PurBonheur.urls'
@@ -132,3 +133,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+if os.environ.get('ENV') == 'PRODUCTION':
+
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+    STATICFILES_DIR = (
+        os.path.join(PROJECT_ROOT, 'static')
+    )
+
+    STATICFILE_STORAGE = \
+        'whitenoise.storage.CompressedManifestStaticFilesStorage'

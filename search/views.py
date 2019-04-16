@@ -6,4 +6,4 @@ def index(request):
     return render(request, 'search/index.html')
 
 def legal(request):
-    return HttpResponse('page de test: Mentions Legales')
+    return render(request, 'search/legal.html')

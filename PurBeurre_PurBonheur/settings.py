@@ -20,8 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'g#3k3b!aopvv*)kv^nwx53fb=fy('
-                             '^k366bwl)s7x!xh^)py4ap')
+SECRET_KEY = os.environ.get('SECRET_KEY',
+                            'g#3k3b!aopvv*)kv^nwx53fb=fy(^k366bwl)s7x!xh^)py4ap')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
@@ -29,8 +29,10 @@ if os.environ.get('ENV') == 'PRODUCTION':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['purbeurre-search.herokuapp.com']
-
+if os.environ.get('ENV') == 'PRODUCTION':
+    ALLOWED_HOSTS = ['purbeurre-search.herokuapp.com']
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -59,8 +61,7 @@ ROOT_URLCONF = 'PurBeurre_PurBonheur.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

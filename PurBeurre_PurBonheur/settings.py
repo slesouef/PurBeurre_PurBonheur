@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -76,13 +75,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PurBeurre_PurBonheur.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 if os.environ.get('ENV') == 'PRODUCTION':
     DATABASES = {
-        'default': {}
+        'default': {},
     }
 else:
     DATABASES = {
@@ -92,10 +90,14 @@ else:
             'USER': 'sebastien',
             'PASSWORD': 'sebastien',
             'HOST': 'localhost',
-            'PORT': '5432'
-        }
+            'PORT': '5432',
+            'TEST': {
+                'NAME': 'mytestdatabase',
+            },
+        },
     }
 
+AUTH_USER_MODEL = 'search.MyUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -115,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -129,15 +130,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
-
 if os.environ.get('ENV') == 'PRODUCTION':
-
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
@@ -148,3 +146,8 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     STATICFILE_STORAGE = \
         'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media files (user avatars)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'search/media/search')
+MEDIA_URL = '/media/'

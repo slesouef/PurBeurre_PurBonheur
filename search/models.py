@@ -24,7 +24,7 @@ class Products(models.Model):
     rating = models.CharField(max_length=1)
     url = models.URLField()
     image = models.URLField(null=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey('Categories', on_delete=models.CASCADE)
     favorites = models.ManyToManyField('MyUser', related_name='favorites')
 
 

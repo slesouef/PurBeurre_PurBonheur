@@ -1,0 +1,14 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+<section class="page-section">
+  <p>{{ title }}</p>
+  <ul>
+    {% for product in products %}
+      <li>{{ product }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}

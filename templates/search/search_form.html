@@ -1,0 +1,12 @@
+<form class="form-inline" action="{% url 'search' %}"
+      method="post">
+  {% csrf_token %}
+  <div class="input-group">
+    <input id="search" type="text" name="search" placeholder="recherche"
+           maxlength="100" required>
+    <span class="input-group-append">
+            <input type="submit" id="query" value="Rechercher"
+                   class="form-control">
+          </span>
+  </div>
+</form>

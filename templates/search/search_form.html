@@ -2,11 +2,11 @@
       method="post">
   {% csrf_token %}
   <div class="input-group">
-    <input id="search" type="text" name="search" placeholder="recherche"
+    <input id="query" type="text" name="query" placeholder="recherche"
            maxlength="100" required>
     <span class="input-group-append">
-            <input type="submit" id="query" value="Rechercher"
-                   class="form-control">
-          </span>
+      <input type="submit" value="Rechercher"
+             class="form-control">
+    </span>
   </div>
 </form>

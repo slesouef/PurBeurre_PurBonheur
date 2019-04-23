@@ -1,3 +1,5 @@
+import requests
+
 from django.shortcuts import render
 # from django.http import HttpResponse
 
@@ -20,6 +22,16 @@ def search(request):
         products = Products.objects.filter(brand__icontains=query)
     if not products.exists():
         products = Categories.objects.filter(name__icontains=query)
+    if not products.exists():
+        response = requests.get(
+            'https://fr.openfoodfacts.org/cgi/search.pl?action=process'
+            '&sort_by=unique_scans_n&page_size=20&json=1&search_terms='+query)
+        data = response.json()
+        product = {}
+        products = []
+        for item in data['products']:
+            product['name'] = item['product_name']
+            products.append(product.copy())
     title = "Resultat de la recherche {}".format(query)
     context = {
         'products': products,

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5a4e38b4f328d775aba62604a93084ce248160fca7d9f50d7460141b8890162f"
+            "sha256": "9e0dc05059304ed6a101982c44f1275d450ba65e250b3f48460eaeb6c9f3c639"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -60,6 +60,10 @@
                 "sha256:ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"
             ],
             "version": "==2.8"
+        },
+        "openfoodfacts": {
+            "git": "https://github.com/openfoodfacts/openfoodfacts-python",
+            "ref": "bbbabd56a7e6f4fdb24f8bf21be3884d5e1475b4"
         },
         "pillow": {
             "hashes": [

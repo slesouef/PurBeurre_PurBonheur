@@ -13,6 +13,7 @@ whitenoise = "*"
 pillow = "*"
 requests = "*"
 dj-database-url = "*"
+openfoodfacts = {git = "https://github.com/openfoodfacts/openfoodfacts-python"}
 
 [requires]
 python_version = "3.7"

@@ -1,12 +1,10 @@
-import requests
-
 from django.shortcuts import render
-# from django.http import HttpResponse
 
+from .myrequests import OpenFoodFactsData
 from .models import Products, Categories
 
 
-# Create your views here.
+
 def index(request):
     return render(request, 'search/index.html')
 
@@ -23,13 +21,12 @@ def search(request):
     if not products.exists():
         products = Categories.objects.filter(name__icontains=query)
     if not products.exists():
-        response = requests.get(
-            'https://fr.openfoodfacts.org/cgi/search.pl?action=process'
-            '&sort_by=unique_scans_n&page_size=20&json=1&search_terms='+query)
-        data = response.json()
+        response = OpenFoodFactsData()
+        response.getdata(query)
+        response.cleanup()
         product = {}
         products = []
-        for item in data['products']:
+        for item in response.results:
             product['name'] = item['product_name']
             products.append(product.copy())
     title = "Resultat de la recherche {}".format(query)

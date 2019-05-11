@@ -1,15 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
 
-
-class MyUser(AbstractBaseUser):
-    first_name = models.CharField(max_length=254)
-    last_name = models.CharField(max_length=254)
-    email = models.EmailField(unique=True)
-    avatar = models.ImageField()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+from account.models import MyUser
 
 
 class Categories(models.Model):
@@ -20,12 +11,13 @@ class Products(models.Model):
     name = models.CharField(max_length=254)
     brand = models.CharField(max_length=254)
     quantity = models.CharField(max_length=254)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     rating = models.CharField(max_length=1)
     url = models.URLField()
     image = models.URLField(null=True)
     category = models.ForeignKey('Categories', on_delete=models.CASCADE)
-    favorites = models.ManyToManyField('MyUser', related_name='favorites')
+    favorites = models.ManyToManyField(MyUser,
+                                       related_name='favorites')
 
 
 class NutritionalValues(models.Model):

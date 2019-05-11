@@ -8,27 +8,18 @@ Returns:
     List of hits ordered by nutritional rating
     Items in list contain the information necessary to build expected display
 """
-import openfoodfacts
-
-from .conf import PAGE_SIZE
 from .models import Categories, Products, NutritionalValues
 
 
-class Results():
-
+class Results:
     pass
 # main method returns 6 items to display
 
 # method to check in database
     # check against product name
-    # check against product brand
+        # get categorie
     # check against product category
 
-# method to make API call if no DB hits
-    # create call URL
-    # make API call
+# get results for relevant category ordered by nutritional rating
 
-# method to insert API results in DB
-
-# method to filter DB or API results
-    #
+# method to filter DB results

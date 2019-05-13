@@ -1,6 +1,6 @@
 from django.db import models
 
-from account.models import MyUser
+from accounts.models import MyUser
 
 
 class Categories(models.Model):

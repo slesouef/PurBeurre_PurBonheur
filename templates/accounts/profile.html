@@ -1,0 +1,23 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+  <section class="page-section bg-rooibos" id="about">
+    <div class="container">
+      <form class='form-inline' action='' method='post'>
+        {% csrf_token %}
+        <div class='form-group'>
+          <label for='email' class='control-label'>Identifiant</label>
+          {{ form.email }}
+        </div>
+        <div class='form-group'>
+          <label for='password' class='control-label'>Mot de Passe</label>
+          {{ form.password }}
+        </div>
+        <!-- <input type="hidden" class="hidden" value="{{ album_id }}" name="album_id"> -->
+        <button type='submit' class='btn btn-success'>authentifier</button>
+      </form>
+    </div>
+  </section>
+
+{% endblock %}

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account.apps.AccountConfig',
+    'accounts.apps.AccountConfig',
     'search.apps.SubstituteConfig',
 ]
 
@@ -99,6 +99,8 @@ else:
     }
 
 AUTH_USER_MODEL = 'account.MyUser'
+
+LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

@@ -98,7 +98,7 @@ else:
         },
     }
 
-AUTH_USER_MODEL = 'account.MyUser'
+AUTH_USER_MODEL = 'accounts.MyUser'
 
 LOGOUT_REDIRECT_URL = '/'
 

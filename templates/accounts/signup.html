@@ -1,0 +1,27 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+  <section class="page-section bg-rooibos" id="signup">
+    <div class="container">
+      <form class='form-inline' action='' method='post'>
+        {% csrf_token %}
+        {% for field in form %}
+          <div class='form-group'>
+            <label for='{{ field.label }}' class='control-label'>
+              {{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <button type='submit' class='btn btn-success'>authentifier</button>
+      </form>
+    </div>
+  </section>
+
+{% endblock %}

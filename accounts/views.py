@@ -36,3 +36,7 @@ def profile(request):
     context['first_name'] = first_name
     context['email'] = user.email
     return render(request, 'accounts/profile.html', context)
+
+
+def logout(request):
+    logout(request)

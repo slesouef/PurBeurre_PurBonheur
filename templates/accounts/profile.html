@@ -1,22 +1,25 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
+ <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-uppercase text-white font-weight-bold">Ahoy!</h1>
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5">{{ first_name }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <section class="page-section bg-rooibos" id="about">
+  <section class="page-section bg-bonbon" id="about">
     <div class="container">
-      <form class='form-inline' action='' method='post'>
-        {% csrf_token %}
-        <div class='form-group'>
-          <label for='email' class='control-label'>Identifiant</label>
-          {{ form.email }}
-        </div>
-        <div class='form-group'>
-          <label for='password' class='control-label'>Mot de Passe</label>
-          {{ form.password }}
-        </div>
-        <!-- <input type="hidden" class="hidden" value="{{ album_id }}" name="album_id"> -->
-        <button type='submit' class='btn btn-success'>authentifier</button>
-      </form>
+      <div class="row justify-content-center">
+        {{ email }}
+      </div>
     </div>
   </section>
 

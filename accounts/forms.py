@@ -1,4 +1,5 @@
-from django.forms import ModelForm, TextInput, EmailInput, PasswordInput
+from django.forms import ModelForm, TextInput, ClearableFileInput, \
+                         EmailInput, PasswordInput
 
 from .models import MyUser
 
@@ -12,6 +13,7 @@ class SignUpForm(ModelForm):
             'username': TextInput(attrs={'class': 'form-control'}),
             'first_name': TextInput(attrs={'class': 'form-control'}),
             'last_name': TextInput(attrs={'class': 'form-control'}),
+            'avatar': ClearableFileInput(attrs={'class': 'form-control-file'}),
             'email': EmailInput(attrs={'class': 'form-control'}),
-            'password': PasswordInput(attrs={'class': 'form-control'})
+            'password': PasswordInput(attrs={'class': 'form-control'}),
         }

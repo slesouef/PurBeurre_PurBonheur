@@ -23,10 +23,10 @@ def search(request):
     if not products.exists():
         response = OpenFoodFactsData()
         response.getdata(query)
-        response.cleanup()
+        results = response.cleanup()
         product = {}
         products = []
-        for item in response.results:
+        for item in results:
             product['name'] = item['product_name']
             products.append(product.copy())
     title = "Resultat de la recherche {}".format(query)

@@ -12,27 +12,24 @@ class OpenFoodFactsData:
     Class containing the raw information retrieved from Open Food Facts
     API
 
-    Returns:
-        JSON formatted object
+    :returns: list of items with mandatory fields from API response
     """
 
     def __init__(self):
         self.raw_data = {}
-        self.results = []
 
     def getdata(self, query):
         """
         Search against API
         :param query: user search term
-        :return: json formatted object
         """
         search_parameters = {"search_terms": query, "page_size": PAGE_SIZE}
         try:
             self.raw_data = openfoodfacts.products.advanced_search(
              search_parameters)
         except ConnectionError:
-            # TODO: display HTTP 500 page
-            print("page_500")
+            # TODO: display error page
+            print("error in search query")
 
     def cleanup(self):
         """
@@ -41,15 +38,16 @@ class OpenFoodFactsData:
 
         :return: list of valid entries from response
         """
+        results = []
         search_results = self.raw_data["products"]
         for item in search_results:
-            try:
-                item["categories"]
-                item["nutrition_grade_fr"]
-                item["product_name_fr"]
-                item["brands"]
-                item["url"]
-                item["quantity"]
-                self.results.append(item)
-            except KeyError:
+            if "categories" in item \
+                    and "product_name_fr" in item \
+                    and "brands" in item \
+                    and "quantity" in item \
+                    and "nutrition_grade_fr" in item \
+                    and "url" in item:
+                results.append(item)
+            else:
                 pass
+        return results

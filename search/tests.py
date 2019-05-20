@@ -1,4 +1,5 @@
 from django.test import TestCase
+from unittest.mock import patch, MagicMock
 
 from search import myrequests
 
@@ -84,14 +85,14 @@ class MyRequestsTestCase(TestCase):
     """test method to search on API"""
 
     @classmethod
-    def setUpClass(cls):
+    def setUpTestData(cls):
         cls.search = myrequests.OpenFoodFactsData()
 
     # TODO: Figure out how to mock this shyte
     # def test_getdata_empty(self):
     #     """test when no hit is response"""
-    #     cls.search.getdata("test")
-    #     self.assertEqual(search.raw_data["count"], 0)
+    #     self.search.getdata("osauhvwqaHVAAhva[soz")
+    #     self.assertEqual(self.search.raw_data["count"], 0)
     #
     # def test_getdata_error(self):
     #     """test when error in API server"""

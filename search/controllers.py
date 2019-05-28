@@ -8,7 +8,7 @@ from .conf import PAGE_SIZE
 from .models import Categories, Products, NutritionalValues
 
 
-def get_data(query):
+def call_api(query):
     """
     Search against Open Food Facts API using the openfoodfacts python
     module's advanced_search method
@@ -20,7 +20,8 @@ def get_data(query):
     raw_data = openfoodfacts.products.advanced_search(search_parameters)
     return raw_data
 
-def cleanup(data):
+
+def cleanup_response(data):
     """
     Method to make sure that all entries from Open Food Facts returned
     contain the necessary keys for treatment
@@ -42,6 +43,7 @@ def cleanup(data):
             pass
     return results
 
+
 def save_data(data):
     """
     Method responsible for the insert of the valid entries retrieved from
@@ -58,3 +60,28 @@ def save_data(data):
         if not check.exists():
             c = Categories(name=clean_cat)
             c.save()
+            cat = c
+        else:
+            cat = check.first()
+        name = item["product_name_fr"]
+        brand = item["brands"]
+        quantity = item["quantity"]
+        rating = item["nutrition_grade_fr"]
+        url = item["url"]
+        p = Products(name=name, brand=brand, quantity=quantity,
+                     rating=rating, url=url, category=cat)
+        if "image_url" in item:
+            image = item["image_url"]
+            p.image =image
+        p.save()
+
+
+def populate_database(query):
+    """
+    Main method to insert results from user query search in database
+
+    :param query: user search term
+    """
+    raw = call_api(query)
+    clean = cleanup_response(raw)
+    save_data(clean)

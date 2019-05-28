@@ -8,64 +8,66 @@ Returns:
     List of hits ordered by nutritional rating
     Items in list contain the information necessary to build expected display
 """
-from .models import Categories, Products, NutritionalValues
+from .models import Products
 
 
-class Suggestions:
+def get_suggestions(query):
+    """
+    Main method implementing the search algorithm
 
-    # main method returns 6 items to display
-    def get_suggestions(self, query):
-        pass
-        # check name
-           # if ok:
-               # get category
-               # get products
-           # else:
-               # check category
-                   # if ok:
-                       # get products
-                   # else:
-                       # check contains
-                           # if ok:
-                               # get category
-                               # get products
+    :param query: User query term from request
+    :return: 6 products objects
+    """
+    search = check_name(query)
+    if not search.exists():
+        search = check_contains(query)
+        if not search.exists():
+            raise LookupError
+    result = search.first()
+    category = get_category(result)
+    products = get_products(category)
+    return products
 
-    # methods to check in database
-    # check against product name
-    def check_name(self, query):
-        """
 
-        :param query: user query from request
-        :return: the first item with name matching the query, if it exists
-        """
-        product = Products.objects.filter(name__exact=query).first()
-        return product
+def check_name(query):
+    """
+    Check against product name in database for exact match
 
-    # check against product category
-    def check_category(self, query):
-        """
+    :param query: user query from request
+    :return: the first item with name matching the query, if it exists
+    """
+    products = Products.objects.filter(name__exact=query)
+    return products
 
-        :param query: user query from request
-        :return: the first category with name matching the query, if it exists
-        """
-        category = Categories.objects.filter(name__exact=query).first()
-        return category
 
-    # check against name wildcard
-    def check_contains(self, query):
-        """
+def check_contains(query):
+    """
+    Check against product name in database with contains match
 
-        :param query: user query from request
-        :return: the first item with name containing the query, if it exists
-        """
-        product = Products.objects.filter(name__icontains=query).first()
-        return product
+    :param query: user query from request
+    :return: the first item with name containing the query, if it exists
+    """
+    products = Products.objects.filter(name__icontains=query)
+    return products
 
-    # get category
-    def get_category(self, item):
-        pass
 
-    # get results for relevant category ordered by nutritional rating
-    def get_products(self, query):
-        pass
-        # method to filter DB results
+def get_category(product):
+    """
+    Get category object from the result of product search
+
+    :param product: product returned from database search
+    :return: category object from product search result
+    """
+    category = product.category
+    return category
+
+
+def get_products(category):
+    """
+    Get the 6 product from the category with the highest rating
+
+    :param category: category object from product search result
+    :return: 6 product objects from category with highest rating
+    """
+    products = Products.objects.filter(category=category).order_by('rating')[:6]
+    return products

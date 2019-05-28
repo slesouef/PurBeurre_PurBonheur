@@ -6,7 +6,7 @@
   <p>{{ title }}</p>
   <ul>
     {% for product in products %}
-      <li>{{ product.name }}</li>
+      <li>{{ product.name }} {{ product.brand }} {{ product.rating }}</li>
     {% endfor %}
   </ul>
 </section>

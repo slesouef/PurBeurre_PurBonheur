@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .controllers import OpenFoodFactsData
+from .controllers import populate_database
 from .models import Products, Categories
 
 
@@ -15,20 +15,21 @@ def legal(request):
 
 def search(request):
     query = request.POST.get('query')
-    products = Products.objects.filter(name__icontains=query)
-    if not products.exists():
-        products = Products.objects.filter(brand__icontains=query)
-    if not products.exists():
-        products = Categories.objects.filter(name__icontains=query)
-    if not products.exists():
-        response = OpenFoodFactsData()
-        response.getdata(query)
-        results = response.cleanup()
-        product = {}
-        products = []
-        for item in results:
-            product['name'] = item['product_name']
-            products.append(product.copy())
+    results = Products.objects.filter(name__icontains=query)
+    if not results.exists():
+        results = Products.objects.filter(brand__icontains=query)
+    if not results.exists():
+        populate_database(query)
+        results = Products.objects.filter(name__icontains=query)
+        if not results.exists():
+            results = Products.objects.filter(brand__icontains=query)
+    category = results.first().category
+    products = Products.objects.filter(category=category).order_by('rating')[:6]
+    # product_list = []
+    # for entry in products:
+    #     name = entry.name
+    #     print(name)
+    #     product_list.append(name)
     title = "Resultat de la recherche {}".format(query)
     context = {
         'products': products,

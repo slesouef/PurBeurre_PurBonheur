@@ -84,4 +84,7 @@ def populate_database(query):
     """
     raw = call_api(query)
     clean = cleanup_response(raw)
-    save_data(clean)
+    if not clean:
+        raise ValueError
+    else:
+        save_data(clean)

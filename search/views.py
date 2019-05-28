@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .myrequests import OpenFoodFactsData
+from .controllers import OpenFoodFactsData
 from .models import Products, Categories
 
 

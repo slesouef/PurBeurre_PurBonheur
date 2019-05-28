@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .controllers import populate_database
-from .models import Products, Categories
+from .search_products import get_suggestions
 
 
 
@@ -15,24 +15,16 @@ def legal(request):
 
 def search(request):
     query = request.POST.get('query')
-    results = Products.objects.filter(name__icontains=query)
-    if not results.exists():
-        results = Products.objects.filter(brand__icontains=query)
-    if not results.exists():
-        populate_database(query)
-        results = Products.objects.filter(name__icontains=query)
-        if not results.exists():
-            results = Products.objects.filter(brand__icontains=query)
-    category = results.first().category
-    products = Products.objects.filter(category=category).order_by('rating')[:6]
-    # product_list = []
-    # for entry in products:
-    #     name = entry.name
-    #     print(name)
-    #     product_list.append(name)
-    title = "Resultat de la recherche {}".format(query)
-    context = {
-        'products': products,
-        'title': title
-    }
+    context ={}
+    context['title'] = "Resultat de la recherche {}".format(query)
+    try:
+        products = get_suggestions(query)
+        context['products'] = products
+    except LookupError:
+        try:
+            populate_database(query)
+            products = get_suggestions(query)
+            context['products'] = products
+        except ValueError:
+            context['error'] = "Votre recherche n'a donne aucun resultats"
     return render(request, 'search/results.html', context)

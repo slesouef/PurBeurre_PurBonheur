@@ -16,7 +16,8 @@ def get_suggestions(query):
     Main method implementing the search algorithm
 
     :param query: User query term from request
-    :return: 6 products objects
+    :return: the search result and 6 products from the same category ordered
+    by rating
     """
     search = check_name(query)
     if not search.exists():
@@ -26,7 +27,7 @@ def get_suggestions(query):
     result = search.first()
     category = get_category(result)
     products = get_products(category)
-    return products
+    return result, products
 
 
 def check_name(query):

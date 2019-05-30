@@ -35,7 +35,7 @@ def check_name(query):
     Check against product name in database for exact match
 
     :param query: user query from request
-    :return: the first item with name matching the query, if it exists
+    :return: query items with name matching the query, if they exists
     """
     products = Products.objects.filter(name__exact=query)
     return products
@@ -46,7 +46,7 @@ def check_contains(query):
     Check against product name in database with contains match
 
     :param query: user query from request
-    :return: the first item with name containing the query, if it exists
+    :return: query items with name containing the query, if they exists
     """
     products = Products.objects.filter(name__icontains=query)
     return products

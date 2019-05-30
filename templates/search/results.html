@@ -2,14 +2,23 @@
 
 {% block content %}
 
-<section class="page-section">
-  <p>{{ title }}</p>
-  <ul>
-    {% for product in products %}
-      <li>{{ product.name }} {{ product.brand }} {{ product.rating }}</li>
-    {% endfor %}
-  </ul>
-  <p>{{ error }}</p>
-</section>
+   <section class="page-section bg-bonbon" id="results">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="mt-0">{{ title }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        {% for product in products %}
+          <div class="col-lg-4 ml-auto text-center">
+            <img src="{{ product.image }}" alt="image produit">
+            <p>{{ product.rating }}</p>
+            <p>{{ product.name }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
 
 {% endblock %}

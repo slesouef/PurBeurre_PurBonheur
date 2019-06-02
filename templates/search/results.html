@@ -20,9 +20,10 @@
       <div class="row">
         {% for product in products %}
           <div class="col-lg-4 ml-auto text-center">
-            <img src="{{ product.image }}" alt="image produit">
-            <p>{{ product.rating }}</p>
-            <p>{{ product.name }}</p>
+            <img src="{{ product.image }}" alt="image produit" class="img-fluid">
+            <div class="nutri-{{ product.rating }} text-white text-capitalize
+             font-weight-bolder text-center">{{ product.rating }}</div>
+            <p class="text-white font-weight-normal">{{ product.name }}</p>
           </div>
         {% endfor %}
       </div>

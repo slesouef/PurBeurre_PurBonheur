@@ -10731,7 +10731,6 @@ header.masthead h1 {
   background: rgba(244, 98, 58, 0.9);
   -webkit-transition: opacity 0.25s ease;
   transition: opacity 0.25s ease;
-  text-align: center;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
@@ -10755,4 +10754,49 @@ header.masthead h1 {
 
 .favorite-icon {
   height: 32px;
+}
+
+.nutri-a {
+  border-radius: 50%;
+  background-color: #038141;
+  width: 69px;
+  height: 69px;
+  font-size: 3rem;
+  line-height: 1.6;
+}
+
+.nutri-b {
+  border-radius: 50%;
+  background-color: #85bb2f;
+  width: 69px;
+  height: 69px;
+  font-size: 3rem;
+  line-height: 1.6;
+}
+
+.nutri-c {
+  border-radius: 50%;
+  background-color: #fecb02;
+  width: 69px;
+  height: 69px;
+  font-size: 3rem;
+  line-height: 1.6;
+}
+
+.nutri-d {
+  border-radius: 50%;
+  background-color: #ee8100;
+  width: 69px;
+  height: 69px;
+  font-size: 3rem;
+  line-height: 1.6;
+}
+
+.nutri-e {
+  border-radius: 50%;
+  background-color: #e63e11;
+  width: 69px;
+  height: 69px;
+  font-size: 3rem;
+  line-height: 1.6;
 }

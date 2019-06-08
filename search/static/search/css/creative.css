@@ -10763,6 +10763,9 @@ header.masthead h1 {
   height: 69px;
   font-size: 3rem;
   line-height: 1.6;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .nutri-b {
@@ -10772,6 +10775,9 @@ header.masthead h1 {
   height: 69px;
   font-size: 3rem;
   line-height: 1.6;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .nutri-c {
@@ -10781,6 +10787,9 @@ header.masthead h1 {
   height: 69px;
   font-size: 3rem;
   line-height: 1.6;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .nutri-d {
@@ -10790,6 +10799,9 @@ header.masthead h1 {
   height: 69px;
   font-size: 3rem;
   line-height: 1.6;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .nutri-e {
@@ -10799,4 +10811,7 @@ header.masthead h1 {
   height: 69px;
   font-size: 3rem;
   line-height: 1.6;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }

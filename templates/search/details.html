@@ -1,0 +1,33 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+   <section class="page-section bg-moule" id="details"
+            style="background-image: url({{ product.image }});
+                    background-size: auto 100%; background-repeat: no-repeat;
+                    background-position: center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="mt-0 text-white">{{ product.name }}</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{#   <section class="page-section bg-bonbon" id="suggestions">#}
+{#    <div class="container">#}
+{#      <div class="row">#}
+{#        {% for product in products %}#}
+{#          <div class="col-lg-4 text-center">#}
+{#            <a href="{{ product.get_absolute_url }}"><img style="width: 100%; max-height: 400px" src="{{ product.image }}" alt="image produit"></a>#}
+{#            <div class="nutri-{{ product.rating }} text-white text-capitalize#}
+{#             font-weight-bolder text-center">{{ product.rating }}</div>#}
+{#            <p class="text-black font-weight-bolder">{{ product.name }}</p>#}
+{#          </div>#}
+{#        {% endfor %}#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+
+{% endblock %}

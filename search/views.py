@@ -28,3 +28,7 @@ def search(request):
         except ValueError:
             context["error"] = "Votre recherche n'a donne aucun resultats"
     return render(request, "search/results.html", context)
+
+
+def details(request, id):
+    return render(request, "search/details.html")

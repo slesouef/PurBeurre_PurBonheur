@@ -19,6 +19,10 @@ class Products(models.Model):
     favorites = models.ManyToManyField(MyUser,
                                        related_name='favorites')
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('details', args=[int(self.id)])
+
 
 class NutritionalValues(models.Model):
     serving_size = models.CharField(max_length=254, blank=True)

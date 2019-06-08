@@ -24,6 +24,7 @@ urlpatterns = [
     path('', search_views.index, name='index'),
     path('legal/', search_views.legal, name='legal'),
     path('search/', search_views.search, name='search'),
+    path('details/<int:id>/', search_views.details, name='details'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', auth_views.LoginView),
     path('accounts/signup/', account_views.signup, name='signup'),

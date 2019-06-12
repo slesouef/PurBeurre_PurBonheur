@@ -6,12 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
+django = "==2.2.2"
 psycopg2-binary = "*"
 gunicorn = "*"
 whitenoise = "*"
 pillow = "*"
-requests = "*"
+requests = "==2.22.0"
 dj-database-url = "*"
 openfoodfacts = {git = "https://github.com/openfoodfacts/openfoodfacts-python"}
 

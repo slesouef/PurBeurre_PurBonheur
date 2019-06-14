@@ -27,7 +27,7 @@ def search(request):
             context["products"] = products
         except ValueError:
             context["error"] = "Votre recherche n'a donne aucun resultats"
-    return render(request, "search/results.html", context)
+    return render(request, "search/results_page.html", context)
 
 
 def details(request, id):

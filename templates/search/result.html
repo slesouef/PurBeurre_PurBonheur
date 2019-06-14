@@ -1,0 +1,11 @@
+<div class="col-lg-4 text-center">
+  <a href="{{ product.get_absolute_url }}"><img style="width: 100%; max-height: 400px"
+                                                src="{{ product.image }}" alt="image produit"></a>
+  <div class="nutri-{{ product.rating }} text-white text-capitalize font-weight-bolder
+                        text-center">{{ product.rating }}</div>
+  <p class="text-black display-4 mt-2 mb-0">{{ product.name }}</p>
+  <form class="form-inline justify-content-center" method="post">
+    <i class="far fa-save fa-3x p-2"></i>
+    <a class="btn btn-outline-primary">Sauvegarder</a>
+  </form>
+</div>

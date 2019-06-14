@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.views.decorators.cache import never_cache
 
 from .forms import SignUpForm
 
 
+@never_cache
 def signup(request):
     if request.user.is_authenticated:
         return redirect('profile')
@@ -30,7 +32,7 @@ def signup(request):
         return render(request, 'accounts/signup.html', {'form': form})
 
 
-@login_required()
+@login_required
 def profile(request):
     context = {
         'avatar': None,

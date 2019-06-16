@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from .controllers import populate_database
 from .search_products import get_suggestions
+from .models import Products
 
 
 def index(request):
@@ -31,4 +32,6 @@ def search(request):
 
 
 def details(request, id):
-    return render(request, "search/details.html")
+    product = Products.objects.filter(id=id).first()
+    context = {"product": product}
+    return render(request, "search/details.html", context)

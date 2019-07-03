@@ -16,7 +16,58 @@
   </section>
 
    <section class="page-section bg-bonbon" id="information">
-    <button class="btn btn-outline-primary" type="button" onclick="location.href='{{ product.url }}'">OpenFoodFacts</button>
+     <table class="table">
+       <thead>
+         <th scope="col">Informations Nutritionnelles</th>
+         <th scope="col">Pour 100g</th>
+         <th scope="col">Pour {{ nutrival.serving_size }}</th>
+       </thead>
+       <tbody>
+         <tr>
+           <th scope="row">Energie</th>
+           <td>{{ nutrival.energy_per100 }} {{ nutrival.energy_unit }}</td>
+           <td>{{ nutrival.energy }} {{ nutrival.energy_unit }}</td>
+         </tr>
+         <tr>
+           <th scope="row">Matieres grasses/Lipides</th>
+           <td>{{ nutrival.fat_per100 }} {{ nutrival.fat_unit }}</td>
+           <td>{{ nutrival.fat }} {{ nutrival.fat_unit }}</td>
+         </tr>
+         <tr>
+           <th scope="row">dont Acides Gras satures</th>
+           <td>{{ nutrival.saturatedFat_per100 }} {{ nutrival.saturatedFat_unit }}</td>
+           <td>{{ nutrival.saturatedFat }} {{ nutrival.saturatedFat_unit }}</td>
+         </tr>
+         <tr>
+           <th scope="row">Glucides</th>
+           <td>{{ nutrival.carbohydrates_per100 }} {{ nutrival.carbohydrates_unit }}</td>
+           <td>{{ nutrival.carbohydrates }} {{ nutrival.carbohydrates_unit }}</td>
+         </tr>
+         <tr>
+           <th scope="row">dont sucres</th>
+           <td>{{ nutrival.sugars_per100 }} {{ nutrival.sugars_unit }}</td>
+           <td>{{ nutrival.sugars }} {{ nutrival.sugars_unit }}</td>
+         </tr>
+         <tr>
+           <th scope="row">Proteines</th>
+           <td>{{ nutrival.proteins_per100 }} {{ nutrival.proteins_unit }}</td>
+           <td>{{ nutrival.proteins }} {{ nutrival.proteins_unit }}</td>
+         </tr>
+         {% if nutrival.fibers %}
+         <tr>
+           <th scope="row">Fibres</th>
+           <td>{{ nutrival.fibers_per100 }} {{ nutrival.fibers_unit }}</td>
+           <td>{{ nutrival.fibers }} {{ nutrival.fibers_unit }}</td>
+         </tr>
+         {% endif %}
+         <tr>
+           <th scope="row">Sel</th>
+           <td>{{ nutrival.salt_per100 }} {{ nutrival.salt_unit }}</td>
+           <td>{{ nutrival.salt }} {{ nutrival.salt_unit }}</td>
+         </tr>
+       </tbody>
+     </table>
+     <button class="btn btn-outline-primary" type="button" onclick="location.href='{{ product.url }}'">OpenFoodFacts</button>
    </section>
 
 {% endblock %}

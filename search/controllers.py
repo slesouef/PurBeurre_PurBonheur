@@ -16,7 +16,7 @@ def call_api(query):
     :param query: user search term
     :return: dictionary object from API response
     """
-    search_parameters = {"search_terms": query, "page_size": PAGE_SIZE}
+    search_parameters = {"search_terms": query, "page_size": PAGE_SIZE, "cc": "fr", "lc": "fr"}
     raw_data = openfoodfacts.products.advanced_search(search_parameters)
     return raw_data
 

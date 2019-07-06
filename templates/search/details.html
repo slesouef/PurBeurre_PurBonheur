@@ -15,8 +15,13 @@
     </div>
   </section>
 
+  {% load static %}
+
    <section class="page-section bg-bonbon" id="information">
-     <table class="table">
+   <div class="row">
+     <img class="col-4 img-fluid" src="{% static nutriscore %}"
+          alt="Nutriscore Produit">
+     <table class="table col-4">
        <thead>
          <th scope="col">Informations Nutritionnelles</th>
          <th scope="col">Pour 100g</th>
@@ -67,6 +72,7 @@
          </tr>
        </tbody>
      </table>
+   </div>
      <button class="btn btn-outline-primary" type="button" onclick="location.href='{{ product.url }}'">OpenFoodFacts</button>
    </section>
 

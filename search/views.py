@@ -34,5 +34,10 @@ def search(request):
 def details(request, id):
     product = Products.objects.filter(id=id).first()
     nutrival = NutritionalValues.objects.filter(pid=id).first()
-    context = {"product": product, "nutrival": nutrival}
+    nutriscore = f'/search/img/score/nutriscore-{product.rating}.svg'
+    context = {
+        "product": product,
+        "nutrival": nutrival,
+        "nutriscore": nutriscore
+    }
     return render(request, "search/details.html", context)

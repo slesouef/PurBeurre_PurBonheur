@@ -42,7 +42,7 @@
     <div>
       <img class="img-thumbnail site-logo" alt="Logo Pur Beurre"
            src="{% static 'search/img/logo_pur_beurre.svg' %}">
-      <a class="navbar-brand" href="">Pur Beurre</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Pur Beurre</a>
     </div>
     <div class="offset-md-4">
       {% block search %}

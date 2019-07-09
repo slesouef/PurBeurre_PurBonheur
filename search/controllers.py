@@ -96,7 +96,7 @@ def save_data(data):
             v.saturatedFat_per100 = item["nutriments"]["saturated-fat_100g"]
         if "saturated-fat_unit" in item["nutriments"]:
             v.saturatedFat_unit = item["nutriments"]["saturated-fat_unit"]
-        if "cabohydrates_serving" in item["nutriments"]:
+        if "carbohydrates_serving" in item["nutriments"]:
             v.carbohydrates = item["nutriments"]["carbohydrates_serving"]
         if "carbohydrates_100g" in item["nutriments"]:
             v.carbohydrates_per100 = item["nutriments"]["carbohydrates_100g"]

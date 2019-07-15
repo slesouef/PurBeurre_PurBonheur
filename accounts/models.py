@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from search.models import Products
+
 
 class MyUser(AbstractUser):
 
     avatar = models.ImageField(blank=True)
+    favorites = models.ManyToManyField(Products,
+                                       related_name='favorites')
 
     REQUIRED_FIELDS = ['first_name', 'email']
 

@@ -1,7 +1,5 @@
 from django.db import models
 
-from accounts.models import MyUser
-
 
 class Categories(models.Model):
     name = models.CharField(max_length=254)
@@ -16,8 +14,6 @@ class Products(models.Model):
     url = models.URLField()
     image = models.URLField(null=True)
     category = models.ForeignKey('Categories', on_delete=models.CASCADE)
-    favorites = models.ManyToManyField(MyUser,
-                                       related_name='favorites')
 
     def get_absolute_url(self):
         from django.urls import reverse

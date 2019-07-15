@@ -5,7 +5,10 @@
                         text-center">{{ product.rating }}</div>
   <p class="text-black display-4 mt-2 mb-0">{{ product.name }}</p>
   <form class="form-inline justify-content-center" method="post">
+    {% csrf_token %}
     <i class="far fa-save fa-3x p-2"></i>
-    <a class="btn btn-outline-primary">Sauvegarder</a>
+    <input type="hidden" value="{{ user_id }}" name="user_id">
+    <input type="hidden" value="{{ product.id }}" name="product_id">
+    <button class="btn btn-outline-primary"  type="submit">Sauvegarder</button>
   </form>
 </div>

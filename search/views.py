@@ -28,8 +28,6 @@ def search(request):
             context["products"] = products
         except ValueError:
             context["error"] = "Votre recherche n'a donne aucun resultats"
-    if request.user.is_authenticated:
-        context['user_id'] = request.user.id
     return render(request, "search/results_page.html", context)
 
 

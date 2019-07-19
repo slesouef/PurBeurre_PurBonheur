@@ -7,7 +7,6 @@
   <form class="form-inline justify-content-center" method="post">
     {% csrf_token %}
     <i class="far fa-save fa-3x p-2"></i>
-    <input type="hidden" value="{{ user_id }}" name="user_id">
     <input type="hidden" value="{{ product.id }}" name="product_id">
     <button class="btn btn-outline-primary"  type="submit">Sauvegarder</button>
   </form>

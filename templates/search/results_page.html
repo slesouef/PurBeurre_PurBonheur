@@ -14,8 +14,9 @@
     </div>
   </section>
 
-  <section class="page-section bg-bonbon" id="suggestions">
+  <section class="bg-bonbon" id="suggestions">
     <div class="container">
+        <h2 class="text-danger text-center p-5">{{ auth_error }}</h2>
       <div class="row">
         {% for product in products %}
           {% include 'search/result.html' %}

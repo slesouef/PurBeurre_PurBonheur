@@ -28,6 +28,8 @@ def search(request):
             context["products"] = products
         except ValueError:
             context["error"] = "Votre recherche n'a donne aucun resultats"
+    if not request.user.is_authenticated:
+        context["auth_error"] = "Veuillez vous authentifier afin de sauvegarder des favoris"
     return render(request, "search/results_page.html", context)
 
 

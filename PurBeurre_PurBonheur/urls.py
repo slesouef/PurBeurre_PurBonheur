@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('accounts/signup/', account_views.signup, name='signup'),
     path('accounts/profile/', account_views.profile, name='profile'),
+    path('accounts/favorite/new/', account_views.save_favorite, name='save_favorite'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # path('admin/', admin.site.urls),
 ]

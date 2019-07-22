@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.views.decorators.cache import never_cache
+from django.http import JsonResponse
 
 from .forms import SignUpForm
+from .models import MyUser
+from search.models import Products
 
 
 @never_cache
@@ -42,6 +45,22 @@ def profile(request):
     context['first_name'] = first_name
     context['email'] = user.email
     return render(request, 'accounts/profile.html', context)
+
+
+@login_required
+def save_favorite(request):
+    userid = request.user.id
+    favid = request.POST['product_id']
+    product = Products.objects.filter(id=favid).first()
+    user = MyUser.objects.filter(id=userid).first()
+    try:
+        user.favorites.get(id=favid)
+        response = {'error': 'Ce produit est deja sauvegarder'}
+    except Products.DoesNotExist:
+        user.favorites.add(product)
+        user.save()
+        response = {'reponse': 'OK'}
+    return JsonResponse(response)
 
 
 def logout(request):

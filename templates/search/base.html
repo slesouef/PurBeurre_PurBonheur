@@ -43,7 +43,7 @@
       <a class="navbar-brand" href="{% url 'index' %}"><img class="img-thumbnail site-logo" alt="Logo Pur Beurre"
            src="{% static 'search/img/logo_pur_beurre.svg' %}"> Pur Beurre</a>
     </div>
-    <div class="offset-md-4">
+    <div class="offset-lg-4 d-none d-sm-none d-md-block">
       {% block search %}
         {% include 'search/search_form.html' %}
       {% endblock %}

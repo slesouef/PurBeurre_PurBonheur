@@ -4,10 +4,10 @@
   <div class="nutri-{{ product.rating }} text-white text-capitalize font-weight-bolder
                         text-center">{{ product.rating }}</div>
   <p class="text-black display-4 mt-2 mb-0">{{ product.name }}</p>
-  <form class="form-inline justify-content-center" method="post" action="{% url 'save_favorite' %}">
+  <form class="form-inline justify-content-center" method="post" onsubmit="save_favorite(this)">
     {% csrf_token %}
     <i class="far fa-save fa-3x p-2"></i>
     <input type="hidden" value="{{ product.id }}" name="product_id">
-    <button class="btn btn-outline-primary"  type="submit">Sauvegarder</button>
+    <button class="btn btn-outline-primary" type="submit">Sauvegarder</button>
   </form>
 </div>

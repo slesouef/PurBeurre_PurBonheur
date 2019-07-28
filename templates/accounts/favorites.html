@@ -1,0 +1,33 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+  <section class="page-section bg-moule" id="result"
+           style="background-image: url({{ user.avatar }});background-size: auto 100%; background-repeat: no-repeat;
+                   background-position: center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="mt-0 text-white">{{ user.get_full_name }}</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-bonbon" id="suggestions">
+    <div class="container">
+      <div class="row">
+        {% for favorite in favorites %}
+          <div class="col-lg-4 text-center py-3">
+            <a href="{{ favorite.get_absolute_url }}"><img style="width: 100%; max-height: 400px"
+                                                           src="{{ favorite.image }}" alt="image produit"></a>
+            <div class="nutri-{{ favorite.rating }} text-white text-capitalize font-weight-bolder
+                        text-center">{{ favorite.rating }}</div>
+            <p class="text-black display-4 mt-2 mb-0">{{ favorite.name }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

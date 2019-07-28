@@ -66,5 +66,14 @@ def save_favorite(request):
         raise PermissionDenied
 
 
+@login_required
+def favorites(request):
+    userid = request.user.id
+    user = MyUser.objects.filter(id=userid).first()
+    favs = user.favorites.all()
+    context = {"user": user, "favorites": favs}
+    return render(request, 'accounts/favorites.html', context)
+
+
 def logout(request):
     logout(request)

@@ -1,14 +1,14 @@
 <div class="row justify-content-center">
-<form class="form-inline" action="{% url 'search' %}"
-      method="post">
-  {% csrf_token %}
-  <div class="input-group">
-    <input id="query" type="text" name="query" placeholder="recherche"
-           maxlength="100" required>
-    <span class="input-group-append">
+  <form class="form-inline" action="{% url 'search' %}"
+        method="post">
+    {% csrf_token %}
+    <div class="input-group">
+      <input id="query" type="text" name="query" placeholder="recherche"
+             maxlength="100" required>
+      <span class="input-group-append">
       <input type="submit" value="Rechercher"
              class="form-control">
     </span>
-  </div>
-</form>
-  </div>
+    </div>
+  </form>
+</div>

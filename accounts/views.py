@@ -56,7 +56,7 @@ def save_favorite(request):
         user = MyUser.objects.filter(id=userid).first()
         try:
             user.favorites.get(id=favid)
-            response = {'error': 'Ce produit est deja sauvegarder'}
+            response = {'error': 'favorite already exists'}
         except Products.DoesNotExist:
             user.favorites.add(product)
             user.save()

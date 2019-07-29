@@ -15,7 +15,7 @@ def legal(request):
 
 def search(request):
     query = request.POST.get("query")
-    context = {"title": "Resultat de la recherche {}".format(query)}
+    context = {"title": "Résultat de la recherche {}".format(query)}
     try:
         result, products = get_suggestions(query)
         context["result"] = result
@@ -27,7 +27,7 @@ def search(request):
             context["result"] = result
             context["products"] = products
         except ValueError:
-            context["error"] = "Votre recherche n'a donne aucun resultats"
+            context["error"] = "Votre recherche n'a donné aucun résultats"
     if not request.user.is_authenticated:
         context["auth_error"] = "Veuillez vous authentifier afin de sauvegarder des favoris"
     return render(request, "search/results_page.html", context)

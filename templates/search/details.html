@@ -33,21 +33,21 @@
        </thead>
        <tbody>
          <tr>
-           <th scope="row">Energie</th>
+           <th scope="row">Énergie</th>
            <td>{{ nutrival.energy_per100 }} {{ nutrival.energy_unit }}</td>
            {% if nutrival.energy %}
              <td>{{ nutrival.energy }} {{ nutrival.energy_unit }}</td>
            {% endif %}
          </tr>
          <tr>
-           <th scope="row">Matieres grasses/Lipides</th>
+           <th scope="row">Matières grasses/Lipides</th>
            <td>{{ nutrival.fat_per100 }} {{ nutrival.fat_unit }}</td>
            {% if nutrival.fat %}
              <td>{{ nutrival.fat }} {{ nutrival.fat_unit }}</td>
            {% endif %}
          </tr>
          <tr>
-           <th scope="row">dont Acides Gras satures</th>
+           <th scope="row">dont Acides Gras saturés</th>
            <td>{{ nutrival.saturatedFat_per100 }} {{ nutrival.saturatedFat_unit }}</td>
            {%  if nutrival.saturatedFat %}
              <td>{{ nutrival.saturatedFat }} {{ nutrival.saturatedFat_unit }}</td>
@@ -61,14 +61,14 @@
            {% endif %}
          </tr>
          <tr>
-           <th scope="row">dont sucres</th>
+           <th scope="row">dont Sucres</th>
            <td>{{ nutrival.sugars_per100 }} {{ nutrival.sugars_unit }}</td>
            {% if nutrival.sugars %}
              <td>{{ nutrival.sugars }} {{ nutrival.sugars_unit }}</td>
            {% endif %}
          </tr>
          <tr>
-           <th scope="row">Proteines</th>
+           <th scope="row">Protéines</th>
            <td>{{ nutrival.proteins_per100 }} {{ nutrival.proteins_unit }}</td>
            {% if nutrival.proteins %}
              <td>{{ nutrival.proteins }} {{ nutrival.proteins_unit }}</td>

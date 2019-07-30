@@ -38,12 +38,13 @@ def signup(request):
 @login_required
 def profile(request):
     context = {
-        'avatar': None,
+        'avatar': False,
     }
     user = request.user
     first_name = user.get_short_name()
     context['first_name'] = first_name
     context['email'] = user.email
+    context['avatar'] = user.avatar
     return render(request, 'accounts/profile.html', context)
 
 

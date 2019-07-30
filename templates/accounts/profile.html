@@ -2,7 +2,8 @@
 
 {% block content %}
  <!-- Masthead -->
-  <header class="masthead">
+  {% if avatar %}
+  <header class="masthead" style="background-image: url({{ MEDIA_URL }}{{ avatar }}); height: 50vh">
     <div class="container h-100">
       <div class="row h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-10 align-self-end">
@@ -14,6 +15,20 @@
       </div>
     </div>
   </header>
+  {% else %}
+  <header class="masthead"  style="height: 50vh">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-uppercase text-white font-weight-bold">Ahoy!</h1>
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5">{{ first_name }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endif %}
 
   <section class="page-section bg-bonbon" id="about">
     <div class="container">

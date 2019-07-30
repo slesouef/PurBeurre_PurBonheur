@@ -16,6 +16,8 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 from search import views as search_views
 from accounts import views as account_views
@@ -32,4 +34,5 @@ urlpatterns = [
     path('accounts/favorites/', account_views.favorites, name='favorites'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

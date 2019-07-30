@@ -16,9 +16,8 @@ def signup(request):
         return redirect('profile')
     else:
         if request.method == 'POST':
-            form = SignUpForm(request.POST)
+            form = SignUpForm(request.POST, request.FILES)
             if form.is_valid():
-                # TODO: user picture save at signup
                 user = form.save(commit=False)
                 username = form.cleaned_data.get('username')
                 raw_password = form.cleaned_data.get('password')

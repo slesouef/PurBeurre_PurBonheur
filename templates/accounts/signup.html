@@ -4,7 +4,7 @@
 
   <section class="page-section bg-bonbon" id="signup">
     <div class="container ">
-      <form class='col-4' method='post'>
+      <form class='col-4' method='post' enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
           <div class='form-group'>

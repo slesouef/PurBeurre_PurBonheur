@@ -1,22 +1,20 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
-
-  <section class="page-section bg-moule" id="result"
-           style="background-image: url({{ result.image }});background-size: auto 100%; background-repeat: no-repeat;
-                   background-position: center">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="mt-0 text-white">{{ result.name }}</h2>
+  <!-- Masthead -->
+  <header class="masthead" style="background-image: url({{ result.image }}); height: 50vh">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-center">
+          <h1 class="text-uppercase text-white font-weight-bold">{{ result.name }}</h1>
         </div>
       </div>
     </div>
-  </section>
+  </header>
 
   <section class="bg-bonbon" id="suggestions">
     <div class="container">
-        <h2 class="text-danger text-center p-5">{{ auth_error }}</h2>
+        <h2 class="text-center p-5">Vous pouvez remplacer cet aliment par:</h2>
       <div class="row">
         {% for product in products %}
           {% include 'search/result.html' %}

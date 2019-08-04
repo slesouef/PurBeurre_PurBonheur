@@ -108,3 +108,6 @@ venv.bak/
 
 #Project Specs
 __Specs
+
+# user files
+/media

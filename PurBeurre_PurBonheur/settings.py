@@ -153,5 +153,5 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
 # Media files (user avatars)
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'search/media/search')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

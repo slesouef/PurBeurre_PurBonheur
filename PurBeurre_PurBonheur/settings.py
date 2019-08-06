@@ -37,6 +37,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -155,7 +156,3 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-if os.environ.get('ENV') == 'PRODUCTION':
-    root = os.path.dirname(__file__).replace('\\', '/')
-    MEDIA_ROOT = os.path.join(root, 'media')

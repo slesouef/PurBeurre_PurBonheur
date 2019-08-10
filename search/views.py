@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .controllers import populate_database
-from .search_products import get_suggestions
+from search import search_products
 from .models import Products, NutritionalValues
 
 
@@ -17,13 +17,13 @@ def search(request):
     query = request.POST.get("query")
     context = {"title": "Résultat de la recherche {}".format(query)}
     try:
-        result, products = get_suggestions(query)
+        result, products = search_products.get_suggestions(query)
         context["result"] = result
         context["products"] = products
     except LookupError:
         try:
             populate_database(query)
-            result, products = get_suggestions(query)
+            result, products = search_products.get_suggestions(query)
             context["result"] = result
             context["products"] = products
         except ValueError:

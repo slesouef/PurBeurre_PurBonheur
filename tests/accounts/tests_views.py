@@ -14,6 +14,7 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         """Test that signup page returns HTTP 200"""
         response = self.client.get('/accounts/signup/')
         self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='accounts/signup.html')
 
     def test_profile_page_unauthenticated_user(self):
         """Test that profile page redirects unauthenticated users to login"""
@@ -47,11 +48,13 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         """Test that profile page is displayed for authenticated users"""
         response = self.client.get('/accounts/profile/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='accounts/profile.html')
 
     def test_favorites_page_authenticated_user(self):
         """Test that favorites page is displayed for authenticated users"""
         response = self.client.get('/accounts/favorites/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='accounts/favorites.html')
 
     def test_logout(self):
         """Test that the logout link redirects ton index page"""

@@ -30,6 +30,7 @@ def signup(request):
                     return redirect('profile')
                 else:
                     user.delete()
+                    # TODO raise error
         else:
             form = SignUpForm()
         return render(request, 'accounts/signup.html', {'form': form})
@@ -73,7 +74,3 @@ def favorites(request):
     favs = user.favorites.all()
     context = {"user": user, "favorites": favs}
     return render(request, 'accounts/favorites.html', context)
-
-
-def logout(request):
-    logout(request)

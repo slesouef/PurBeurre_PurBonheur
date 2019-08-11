@@ -8,6 +8,20 @@ from .conf import PAGE_SIZE
 from .models import Categories, Products, NutritionalValues
 
 
+def populate_database(query):
+    """
+    Main method to insert results from user query search in database
+
+    :param query: user search term
+    """
+    raw = call_api(query)
+    clean = cleanup_response(raw)
+    if not clean:
+        raise ValueError
+    else:
+        save_data(clean)
+
+
 def call_api(query):
     """
     Search against Open Food Facts API using the openfoodfacts python
@@ -127,17 +141,3 @@ def save_data(data):
         if "salt_unit" in item["nutriments"]:
             v.salt_unit = item["nutriments"]["salt_unit"]
         v.save()
-
-
-def populate_database(query):
-    """
-    Main method to insert results from user query search in database
-
-    :param query: user search term
-    """
-    raw = call_api(query)
-    clean = cleanup_response(raw)
-    if not clean:
-        raise ValueError
-    else:
-        save_data(clean)

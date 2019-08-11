@@ -29,6 +29,8 @@ class SearchPageTestCase(TestCase):
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/result.html')
+        self.assertEqual(response.context['result'], 'result')
+        self.assertEqual(response.context['products'], 'products')
 
     @patch('search.views.get_suggestions')
     @patch('search.views.populate_database')
@@ -37,6 +39,8 @@ class SearchPageTestCase(TestCase):
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/result.html')
+        self.assertEqual(response.context['result'], 'result')
+        self.assertEqual(response.context['products'], 'products')
 
     @patch('search.views.get_suggestions')
     @patch('search.views.populate_database')
@@ -45,3 +49,4 @@ class SearchPageTestCase(TestCase):
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/results_page.html')
+        self.assertEqual(response.context['error'], "Votre recherche n'a donné aucun résultats")

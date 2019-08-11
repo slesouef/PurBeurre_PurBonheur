@@ -26,6 +26,14 @@ class SearchPageTestCase(TestCase):
     @patch('search.views.get_suggestions')
     def test_search_page_item_in_database(self, mock_search):
         mock_search.return_value = {'result': 'result', 'products': 'products'}
-        response = self.client.post('/search/', {'query': 'nutella'})
+        response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/results_page.html')
+
+    @patch('search.views.get_suggestions')
+    @patch('search.views.populate_database')
+    def test_search_page_item_not_in_database(self, mock_api, mock_search):
+        mock_search.return_value = [LookupError, {'result': 'result', 'products': 'products'}]
+        response = self.client.post('/search/', {'query': 'test'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/result.html')

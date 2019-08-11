@@ -4,6 +4,7 @@ from accounts.models import MyUser
 
 
 class UnauthenticatedAccountsViewsTestCases(TestCase):
+    """Verify the behaviour of the accounts app views when a user is not authenticated"""
 
     def test_login_page(self):
         """Test that login page returns HTTP 200"""
@@ -34,8 +35,10 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
 
 
 class AuthenticatedAccountsViewsTestCases(TestCase):
+    """Verify the behaviour of the accounts app views when the user is authenticated"""
 
     def setUp(self):
+        """Create authenticated user"""
         self.user = MyUser.objects.create_user(username='test')
         self.client.force_login(self.user)
 

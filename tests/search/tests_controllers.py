@@ -56,6 +56,8 @@ MOCK_RESULT = {"products": [
     }
 ]}
 
+INVALID_RESULTS = {"products": []}
+
 
 @mock.patch('search.controllers.openfoodfacts')
 class TestControllers(TestCase):
@@ -71,3 +73,9 @@ class TestControllers(TestCase):
         """Verify that all invalid results are discarded"""
         results = controllers.cleanup_response(MOCK_RESULT)
         self.assertEqual(len(results), 1)
+
+    def test_populate_database_no_results(self, mock_api):
+        """Verify that error is raised if the API does not return valid results"""
+        mock_api.products.advanced_search.return_value = INVALID_RESULTS
+        with self.assertRaises(ValueError):
+            controllers.populate_database("query")

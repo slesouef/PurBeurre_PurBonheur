@@ -66,3 +66,8 @@ class TestControllers(TestCase):
         mock_api.products.advanced_search.return_value = MOCK_RESULT
         results = controllers.call_api("query")
         self.assertEqual(len(results["products"]), 7)
+
+    def test_cleanup_response(self, mock_api):
+        """Verify that all invalid results are discarded"""
+        results = controllers.cleanup_response(MOCK_RESULT)
+        self.assertEqual(len(results), 1)

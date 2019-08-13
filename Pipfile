@@ -16,6 +16,7 @@ requests = "*"
 dj-database-url = "*"
 openfoodfacts = {git = "https://github.com/openfoodfacts/openfoodfacts-python"}
 django-storages = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.7"

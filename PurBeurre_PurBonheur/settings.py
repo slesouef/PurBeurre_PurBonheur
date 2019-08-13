@@ -165,4 +165,4 @@ if os.environ.get('ENV') == 'PRODUCTION':
     AWS_STORAGE_BUCKET_NAME = 'purbeurre-assets'
 
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'

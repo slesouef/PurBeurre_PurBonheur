@@ -15,6 +15,7 @@ pillow = "*"
 requests = "*"
 dj-database-url = "*"
 openfoodfacts = {git = "https://github.com/openfoodfacts/openfoodfacts-python"}
+django-storages = "*"
 
 [requires]
 python_version = "3.7"

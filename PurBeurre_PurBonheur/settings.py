@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountConfig',
     'search.apps.SubstituteConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,7 @@ WSGI_APPLICATION = 'PurBeurre_PurBonheur.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 if os.environ.get('ENV') == 'PRODUCTION':
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+    DATABASES = {'default': dj_database_url.config(conn_max_age=500)}
 else:
     DATABASES = {
         'default': {
@@ -163,10 +163,3 @@ if os.environ.get('ENV') == 'PRODUCTION':
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = 'purbeurre-assets'
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-
-    AWS_LOCATION = 'media'

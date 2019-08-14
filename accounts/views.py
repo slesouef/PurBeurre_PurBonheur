@@ -25,12 +25,8 @@ def signup(request):
                 user.save()
                 authenticated_user = authenticate(request, username=username,
                                                   password=raw_password)
-                if authenticated_user is not None:
-                    login(request, authenticated_user)
-                    return redirect('profile')
-                else:
-                    user.delete()
-                    # TODO raise error
+                login(request, authenticated_user)
+                return redirect('profile')
         else:
             form = SignUpForm()
         return render(request, 'accounts/signup.html', {'form': form})

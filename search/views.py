@@ -26,7 +26,7 @@ def search(request):
             result, products = get_suggestions(query)
             context["result"] = result
             context["products"] = products
-        except ValueError:
+        except (ValueError, LookupError):
             context["error"] = "Votre recherche n'a donné aucun résultats"
     return render(request, "search/results_page.html", context)
 

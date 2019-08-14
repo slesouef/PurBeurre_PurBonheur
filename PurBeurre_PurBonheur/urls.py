@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -33,6 +32,5 @@ urlpatterns = [
     path('accounts/favorites/new/', account_views.save_favorite, name='save_favorite'),
     path('accounts/favorites/', account_views.favorites, name='favorites'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    # path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

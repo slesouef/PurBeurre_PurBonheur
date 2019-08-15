@@ -55,3 +55,16 @@ class CheckContainsTestCases(TestCase):
         mock_db.return_value = [product1, product2]
         results = search_products.check_name('test')
         self.assertEqual(len(results), 2)
+
+
+class GetCategoryTestCases(TestCase):
+    """Verify that the method returns the category of a product"""
+
+    def test_get_category(self):
+        """A product's category is return when the product is passed to the
+        method"""
+        category = Categories(name='test_category')
+        product = Products(category=category)
+        result = search_products.get_category(product)
+        self.assertEqual(result.name, 'test_category')
+        self.assertIsInstance(result, Categories)

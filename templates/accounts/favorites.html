@@ -1,18 +1,28 @@
 {% extends 'search/base.html' %}
 
 {% block content %}
-
-  <section class="page-section bg-moule" id="result"
-           style="background-image: url({{ user.avatar }});background-size: auto 100%; background-repeat: no-repeat;
-                   background-position: center">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="mt-0 text-white">{{ user.get_full_name }}</h2>
+    <!-- Masthead -->
+  {% if avatar %}
+  <header class="masthead" style="background-image: url({{ MEDIA_URL }}{{ avatar }}); height: 50vh">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-lg-10 text-center">
+          <h1 class="text-capitalize text-white font-weight-bold">{{ user_name }}</h1>
         </div>
       </div>
     </div>
-  </section>
+  </header>
+  {% else %}
+  <header class="masthead"  style="height: 50vh">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-lg-10 text-center">
+          <h1 class="text-capitalize text-white font-weight-bold">{{ user_name }}</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endif %}
 
   <section class="bg-bonbon" id="suggestions">
     <div class="container">

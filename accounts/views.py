@@ -57,7 +57,7 @@ def save_favorite(request):
         except Products.DoesNotExist:
             user.favorites.add(product)
             user.save()
-            response = {'reponse': 'OK'}
+            response = {'response': 'OK'}
         return JsonResponse(response)
     else:
         raise PermissionDenied
@@ -65,8 +65,13 @@ def save_favorite(request):
 
 @login_required
 def favorites(request):
+    context = {
+        'avatar': False,
+    }
     userid = request.user.id
     user = MyUser.objects.filter(id=userid).first()
     favs = user.favorites.all()
-    context = {"user": user, "favorites": favs}
+    context['user_name'] = user.get_full_name
+    context['favorites'] = favs
+    context['avatar'] = user.avatar
     return render(request, 'accounts/favorites.html', context)

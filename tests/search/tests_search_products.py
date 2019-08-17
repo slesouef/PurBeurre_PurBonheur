@@ -110,3 +110,24 @@ class GetSuggestionTestCases(TestCase):
         self.assertIsInstance(result, tuple)
         self.assertIsInstance(result[0], Products)
         self.assertIsInstance(result[1], list)
+
+    @patch('search.search_products.get_products')
+    @patch('search.search_products.check_contains')
+    @patch('search.search_products.check_name')
+    def test_get_suggestion_check_contains_hit(self, mock_name, mock_contains,
+                                               mock_results):
+        """Verify that if the check contains method returns, get suggestions
+        returns a tuple as well"""
+        query_cat = Categories(name='test')
+        empty_set = Products.objects.none()
+        query_result = Products(category=query_cat)
+        mock_name.return_value = empty_set
+        mock_contains.return_value = MagicMock(
+            side_effect=Products.objects.filter(),
+            return_value=query_result)
+        mock_contains.return_value.first.return_value = query_result
+        mock_results.return_value = [query_result]
+        result = search_products.get_suggestions('test')
+        self.assertIsInstance(result, tuple)
+        self.assertIsInstance(result[0], Products)
+        self.assertIsInstance(result[1], list)

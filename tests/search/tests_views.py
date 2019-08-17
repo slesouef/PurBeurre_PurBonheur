@@ -8,6 +8,8 @@ class IndexPageTestCase(TestCase):
     def test_index_page(self):
         response = self.client.get('')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
         self.assertTemplateUsed(response, 'search/index.html')
 
 
@@ -17,6 +19,8 @@ class LegalPageTestCase(TestCase):
     def test_legal_page(self):
         response = self.client.get('/legal/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
         self.assertTemplateUsed(response, 'search/legal.html')
 
 
@@ -28,6 +32,9 @@ class SearchPageTestCase(TestCase):
         mock_search.return_value = {'result': 'result', 'products': 'products'}
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
+        self.assertTemplateUsed(response, 'search/results_page.html')
         self.assertTemplateUsed(response, 'search/result.html')
         self.assertEqual(response.context['result'], 'result')
         self.assertEqual(response.context['products'], 'products')
@@ -35,9 +42,13 @@ class SearchPageTestCase(TestCase):
     @patch('search.views.get_suggestions')
     @patch('search.views.populate_database')
     def test_search_page_item_not_in_database(self, mock_api, mock_search):
-        mock_search.side_effect = [LookupError, {'result': 'result', 'products': 'products'}]
+        mock_search.side_effect = [LookupError, {'result': 'result',
+                                                 'products': 'products'}]
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
+        self.assertTemplateUsed(response, 'search/results_page.html')
         self.assertTemplateUsed(response, 'search/result.html')
         self.assertEqual(response.context['result'], 'result')
         self.assertEqual(response.context['products'], 'products')
@@ -48,5 +59,9 @@ class SearchPageTestCase(TestCase):
         mock_search.side_effect = [LookupError, ValueError]
         response = self.client.post('/search/', {'query': 'test'})
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
         self.assertTemplateUsed(response, 'search/results_page.html')
-        self.assertEqual(response.context['error'], "Votre recherche n'a donné aucun résultats")
+        self.assertTemplateNotUsed(response, 'search/result.html')
+        self.assertEqual(response.context['error'],
+                         "Votre recherche n'a donné aucun résultats")

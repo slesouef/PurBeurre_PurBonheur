@@ -1,6 +1,8 @@
 from django.test import TestCase
 from unittest.mock import patch, MagicMock
 
+from search.models import Products, NutritionalValues
+
 
 class IndexPageTestCase(TestCase):
     """test that index page returns http 200"""
@@ -65,3 +67,27 @@ class SearchPageTestCase(TestCase):
         self.assertTemplateNotUsed(response, 'search/result.html')
         self.assertEqual(response.context['error'],
                          "Votre recherche n'a donné aucun résultats")
+
+
+class DetailPageTestCases(TestCase):
+    """Test that the details page returns 200"""
+
+    @patch('search.models.NutritionalValues.objects.filter')
+    @patch('search.models.Products.objects.filter')
+    def test_details(self, mock_product, mock_nutrival):
+        mock_product.return_value = MagicMock(
+            side_effect=Products.objects.filter()
+        )
+        mock_product.return_value.first.return_value = Products(rating='a')
+        mock_nutrival.return_value = MagicMock(
+            side_effect=Products.objects.filter()
+        )
+        mock_nutrival.return_value.first.return_value = NutritionalValues()
+        response = self.client.get('/details/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search/base.html')
+        self.assertTemplateUsed(response, 'search/search_form.html')
+        self.assertTemplateUsed(response, 'search/details.html')
+        self.assertIsInstance(response.context['product'], Products)
+        self.assertIsInstance(response.context['nutrival'], NutritionalValues)
+        self.assertIn('nutriscore-a', response.context['nutriscore'])

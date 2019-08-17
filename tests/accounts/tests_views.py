@@ -1,10 +1,12 @@
 from django.test import TestCase
+from django.contrib import auth
 
 from accounts.models import MyUser
 
 
 class UnauthenticatedAccountsViewsTestCases(TestCase):
-    """Verify the behaviour of the accounts app views when a user is not authenticated"""
+    """Verify the behaviour of the accounts app views when a user is not
+    authenticated"""
 
     def test_login_page(self):
         """Test that login page returns HTTP 200"""
@@ -17,25 +19,43 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='accounts/signup.html')
 
+    def test_signup(self):
+        """Test the signup process"""
+        form_data = {'username': 'test',
+                     'first_name': 'test',
+                     'last_name': 'test',
+                     'email': 'test@test.com',
+                     'password': 'test'}
+        response = self.client.post('/accounts/signup/', form_data)
+        user = auth.get_user(self.client)
+        new_entry = MyUser.objects.filter(username='test')
+        self.assertTrue(new_entry.exists)
+        self.assertRedirects(response, '/accounts/profile/')
+        self.assertTrue(user.is_authenticated)
+
     def test_profile_page_unauthenticated_user(self):
         """Test that profile page redirects unauthenticated users to login"""
         response = self.client.get('/accounts/profile/')
-        self.assertRedirects(response, '/accounts/login/?next=/accounts/profile/')
+        self.assertRedirects(response,
+                             '/accounts/login/?next=/accounts/profile/')
 
     def test_favorites_page_unauthenticated_user(self):
         """Test that unauthenticated users are redirected to login page"""
         response = self.client.get('/accounts/favorites/')
-        self.assertRedirects(response, '/accounts/login/?next=/accounts/favorites/')
+        self.assertRedirects(response,
+                             '/accounts/login/?next=/accounts/favorites/')
 
     def test_save_favorite_unauthenticated_user(self):
-        """Test that save favorites raises Permission Denied for unauthenticated users"""
+        """Test that save favorites raises Permission Denied for
+        unauthenticated users"""
         response = self.client.get('/accounts/favorites/new/')
         self.assertEqual(response.status_code, 403)
         self.assertTemplateUsed(response, template_name='403.html')
 
 
 class AuthenticatedAccountsViewsTestCases(TestCase):
-    """Verify the behaviour of the accounts app views when the user is authenticated"""
+    """Verify the behaviour of the accounts app views when the user
+    is authenticated"""
 
     def setUp(self):
         """Create authenticated user"""
@@ -51,13 +71,15 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         """Test that profile page is displayed for authenticated users"""
         response = self.client.get('/accounts/profile/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='accounts/profile.html')
+        self.assertTemplateUsed(response,
+                                template_name='accounts/profile.html')
 
     def test_favorites_page_authenticated_user(self):
         """Test that favorites page is displayed for authenticated users"""
         response = self.client.get('/accounts/favorites/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='accounts/favorites.html')
+        self.assertTemplateUsed(response,
+                                template_name='accounts/favorites.html')
 
     def test_logout(self):
         """Test that the logout link redirects ton index page"""

@@ -41,7 +41,7 @@ class CheckContainsTestCases(TestCase):
         if no matches are found"""
         empty_set = Products.objects.none()
         mock_db.return_value = empty_set
-        results = search_products.check_name('test')
+        results = search_products.check_contains('test')
         self.assertEqual(len(results), 0)
 
     @patch('search.models.Products.objects.filter')
@@ -49,11 +49,11 @@ class CheckContainsTestCases(TestCase):
         """Verify that the method returns the query set if a hit is found"""
         product1 = Products(name='test')
         mock_db.return_value = [product1]
-        results = search_products.check_name('test')
+        results = search_products.check_contains('test')
         self.assertEqual(len(results), 1)
         product2 = Products(name='tes')
         mock_db.return_value = [product1, product2]
-        results = search_products.check_name('test')
+        results = search_products.check_contains('test')
         self.assertEqual(len(results), 2)
 
 

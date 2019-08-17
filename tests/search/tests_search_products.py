@@ -1,5 +1,5 @@
 from django.test import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from search import search_products
 from search.models import Products, Categories
@@ -51,7 +51,7 @@ class CheckContainsTestCases(TestCase):
         mock_db.return_value = [product1]
         results = search_products.check_contains('test')
         self.assertEqual(len(results), 1)
-        product2 = Products(name='tes')
+        product2 = Products(name='test')
         mock_db.return_value = [product1, product2]
         results = search_products.check_contains('test')
         self.assertEqual(len(results), 2)
@@ -68,3 +68,22 @@ class GetCategoryTestCases(TestCase):
         result = search_products.get_category(product)
         self.assertEqual(result.name, 'test_category')
         self.assertIsInstance(result, Categories)
+
+
+class GetProductsTestCases(TestCase):
+    """Verify that the method returns a query set object with the products
+    from the category passed"""
+
+    @patch('search.models.Products.objects.filter')
+    def test_get_products(self, mock_db):
+        category = Categories(name='test')
+        product = Products(name='test')
+        mock_db.return_value = MagicMock(
+            side_effect=Products.objects.filter(category=category)
+        )
+        mock_db.return_value.order_by.return_value = [product]
+        result = search_products.get_products(category)
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result, list)
+        mock_db.assert_called_with(category=category)
+        mock_db.return_value.order_by.assert_called_with('rating')

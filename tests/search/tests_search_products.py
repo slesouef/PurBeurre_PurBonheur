@@ -87,3 +87,26 @@ class GetProductsTestCases(TestCase):
         self.assertIsInstance(result, list)
         mock_db.assert_called_with(category=category)
         mock_db.return_value.order_by.assert_called_with('rating')
+
+
+class GetSuggestionTestCases(TestCase):
+    """Verify that the main module method returns either a LookupError if no
+    match for the query is found in database or a tuple of the found product
+    and the suggested replacements"""
+
+    @patch('search.search_products.get_products')
+    @patch('search.search_products.check_name')
+    def test_get_suggestion_check_name_hit(self, mock_search, mock_results):
+        """Verify that if the check name method returns, get suggestions
+        returns a tuple as well"""
+        query_cat = Categories(name='test')
+        query_result = Products(category=query_cat)
+        mock_search.return_value = MagicMock(
+            side_effect=Products.objects.filter(),
+            return_value=query_result)
+        mock_search.return_value.first.return_value = query_result
+        mock_results.return_value = [query_result]
+        result = search_products.get_suggestions('test')
+        self.assertIsInstance(result, tuple)
+        self.assertIsInstance(result[0], Products)
+        self.assertIsInstance(result[1], list)

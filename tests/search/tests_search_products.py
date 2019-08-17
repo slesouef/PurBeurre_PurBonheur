@@ -89,14 +89,14 @@ class GetProductsTestCases(TestCase):
         mock_db.return_value.order_by.assert_called_with('rating')
 
 
-class GetSuggestionTestCases(TestCase):
+class GetSuggestionsTestCases(TestCase):
     """Verify that the main module method returns either a LookupError if no
     match for the query is found in database or a tuple of the found product
     and the suggested replacements"""
 
     @patch('search.search_products.get_products')
     @patch('search.search_products.check_name')
-    def test_get_suggestion_check_name_hit(self, mock_search, mock_results):
+    def test_get_suggestions_check_name_hit(self, mock_search, mock_results):
         """Verify that if the check name method returns, get suggestions
         returns a tuple as well"""
         query_cat = Categories(name='test')
@@ -114,8 +114,8 @@ class GetSuggestionTestCases(TestCase):
     @patch('search.search_products.get_products')
     @patch('search.search_products.check_contains')
     @patch('search.search_products.check_name')
-    def test_get_suggestion_check_contains_hit(self, mock_name, mock_contains,
-                                               mock_results):
+    def test_get_suggestions_check_contains_hit(self, mock_name, mock_contains,
+                                                mock_results):
         """Verify that if the check contains method returns, get suggestions
         returns a tuple as well"""
         query_cat = Categories(name='test')
@@ -131,3 +131,14 @@ class GetSuggestionTestCases(TestCase):
         self.assertIsInstance(result, tuple)
         self.assertIsInstance(result[0], Products)
         self.assertIsInstance(result[1], list)
+
+    @patch('search.search_products.check_contains')
+    @patch('search.search_products.check_name')
+    def test_get_suggestions_no_hit(self, mock_name, mock_contains):
+        """Verify that if the searches do not find a hit the method raises a
+        LookupError exception"""
+        empty_set = Products.objects.none()
+        mock_name.return_value = empty_set
+        mock_contains.return_value = empty_set
+        with self.assertRaises(LookupError):
+            search_products.get_suggestions('test')

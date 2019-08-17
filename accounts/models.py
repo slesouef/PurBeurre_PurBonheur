@@ -5,17 +5,19 @@ from search.models import Products
 
 
 def user_directory_path(instance, filename):
-    # the user avatar image will be uploaded to MEDIA_ROOT/<username>/<filename>
+    # the avatar image will be uploaded to MEDIA_ROOT/<username>/<filename>
     return f'{instance.username}/{filename}'
 
 
 class MyUser(AbstractUser):
 
+    first_name = models.CharField(blank=False, max_length=30,
+                                  verbose_name='first name')
+    email = models.EmailField(blank=False, max_length=254,
+                              verbose_name='email address')
     avatar = models.ImageField(blank=True, upload_to=user_directory_path)
     favorites = models.ManyToManyField(Products,
                                        related_name='favorites')
-
-    REQUIRED_FIELDS = ['first_name', 'email']
 
     def get_full_name(self):
         """

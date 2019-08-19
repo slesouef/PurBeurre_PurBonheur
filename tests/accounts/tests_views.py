@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib import auth
 
 from accounts.models import MyUser
+from search.models import Products, Categories
 
 
 class UnauthenticatedAccountsViewsTestCases(TestCase):
@@ -80,6 +81,34 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 template_name='accounts/favorites.html')
+
+    def test_save_favorite_new(self):
+        """Test that a new favorite is added for the user when called by an
+        authenticated user and it is not already a favorite"""
+        cat = Categories.objects.create(name="name")
+        prod = Products.objects.create(category=cat, name="name")
+        prod_id = prod.id
+        response = self.client.post('/accounts/favorites/new/',
+                                   {'product_id': prod_id})
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {"response": "OK"})
+        favs = self.user.favorites.all()
+        self.assertEqual(len(favs), 1)
+
+    def test_save_favorite_already_exists(self):
+        """Test that no new favorite is added for the user when called by an
+        authenticated user and the favorite already exists"""
+        cat = Categories.objects.create(name="name")
+        prod = Products.objects.create(category=cat, name="name")
+        prod_id = prod.id
+        self.user.favorites.add(prod)
+        response = self.client.post('/accounts/favorites/new/',
+                                   {'product_id': prod_id})
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content,
+                             {"error": "favorite already exists"})
+        favs = self.user.favorites.all()
+        self.assertEqual(len(favs), 1)
 
     def test_logout(self):
         """Test that the logout link redirects ton index page"""

@@ -6,18 +6,24 @@ from search.models import Products, Categories
 
 
 class UnauthenticatedAccountsViewsTestCases(TestCase):
-    """Verify the behaviour of the accounts app views when a user is not
-    authenticated"""
+    """
+    Verify the behaviour of the accounts app views when a user is not
+    authenticated
+    """
 
     def test_login_page(self):
         """Test that login page returns HTTP 200"""
         response = self.client.get('/accounts/login/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='search/base.html')
+        self.assertTemplateUsed(response,
+                                template_name='registration/login.html')
 
     def test_signup_page(self):
         """Test that signup page returns HTTP 200"""
         response = self.client.get('/accounts/signup/')
         self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='search/base.html')
         self.assertTemplateUsed(response, template_name='accounts/signup.html')
 
     def test_signup(self):
@@ -72,6 +78,7 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         """Test that profile page is displayed for authenticated users"""
         response = self.client.get('/accounts/profile/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='search/base.html')
         self.assertTemplateUsed(response,
                                 template_name='accounts/profile.html')
 
@@ -79,6 +86,7 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         """Test that favorites page is displayed for authenticated users"""
         response = self.client.get('/accounts/favorites/')
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='search/base.html')
         self.assertTemplateUsed(response,
                                 template_name='accounts/favorites.html')
 

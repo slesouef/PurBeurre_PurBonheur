@@ -53,7 +53,7 @@ INVALID_RESULTS = {"products": [
 class TestControllers(TestCase):
     """Testing the search controllers module behaviour"""
 
-    @mock.patch('search.controllers.openfoodfacts')
+    @mock.patch("search.controllers.openfoodfacts")
     def test_call_api(self, mock_api):
         """Verify call API method returns the raw API results"""
         mock_api.products.advanced_search.return_value = INVALID_RESULTS
@@ -81,7 +81,7 @@ class TestControllers(TestCase):
         results = controllers.cleanup_response(INVALID_RESULTS)
         self.assertEqual(len(results), 0)
 
-    @mock.patch('search.controllers.openfoodfacts')
+    @mock.patch("search.controllers.openfoodfacts")
     def test_populate_database_no_results(self, mock_api):
         """Verify that error is raised if the API does not return valid
         results"""
@@ -90,10 +90,12 @@ class TestControllers(TestCase):
         with self.assertRaises(ValueError):
             controllers.populate_database("query")
 
-    @mock.patch('search.controllers.openfoodfacts')
+    @mock.patch("search.controllers.openfoodfacts")
     def test_populate_database(self, mock_api):
-        """Verify that an item is created in database if the API response
-        contains a valid item"""
+        """
+        Verify that an item is created in database if the API response
+        contains a valid item
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -111,8 +113,10 @@ class TestControllers(TestCase):
         self.assertEqual(len(saved_item), 1)
 
     def test_save_data_minimal(self):
-        """Verify that an item is created in database if only required fields
-        are available"""
+        """
+        Verify that an item is created in database if only required fields
+        are available
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -138,8 +142,10 @@ class TestControllers(TestCase):
         self.assertTrue(saved_item.url, "url")
 
     def test_save_data_category_exists(self):
-        """Verify that if the category exists, no new category is created
-        when an item is created"""
+        """
+        Verify that if the category exists, no new category is created
+        when an item is created
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -157,8 +163,10 @@ class TestControllers(TestCase):
         self.assertEqual(len(categories), 1)
 
     def test_save_data_with_image(self):
-        """Verify that an item is created in database with an image if the
-        image url is available in API response"""
+        """
+        Verify that an item is created in database with an image if the
+        image url is available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -176,9 +184,11 @@ class TestControllers(TestCase):
         self.assertTrue(saved_item.image, "image_url")
 
     def test_save_data_with_serving_size(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value serving size if the field serving size is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -197,9 +207,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.serving_size, "serving_size")
 
     def test_save_data_with_energy_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value energy field if the field energy serving is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -219,9 +231,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.energy, "energy_serving")
 
     def test_save_data_with_energy_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value energy per 100 field if the field energy 100g is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -241,9 +255,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.energy_per100, "energy_100g")
 
     def test_save_data_with_energy_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value energy unit field if the field energy unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -263,9 +279,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.energy_unit, "energy_unit")
 
     def test_save_data_with_fat_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fat serving field if the field fat serving is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -285,9 +303,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fat, "fat_serving")
 
     def test_save_data_with_fat_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fat per 100 field if the field fat 100g is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -307,9 +327,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fat_per100, "fat_100g")
 
     def test_save_data_with_fat_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fat unit field if the field fat unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -329,9 +351,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fat_unit, "fat_unit")
 
     def test_save_data_with_saturated_fat_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value saturated fat serving field if the field saturated fat serving
-        is available in API response"""
+        is available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -351,9 +375,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.saturatedFat, "saturated-fat_serving")
 
     def test_save_data_with_saturated_fat_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value saturated fat per 100 field if the field saturated fat 100g
-        is available in API response"""
+        is available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -373,9 +399,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.saturatedFat_per100, "saturated-fat_100g")
 
     def test_save_data_with_saturated_fat_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value saturated fat unit field if the field saturated fat unit is
-        available in API response"""
+        available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -395,9 +423,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.saturatedFat_unit, "saturated-fat_unit")
 
     def test_save_data_with_carbohydrates_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value carbohydrates serving field if the field carbohydrates serving
-        is available in API response"""
+        is available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -417,9 +447,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.carbohydrates, "carbohydrates_serving")
 
     def test_save_data_with_carbohydrates_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value carbohydrates per 100 field if the field carbohydrates 100g
-        is available in API response"""
+        is available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -439,9 +471,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.carbohydrates_per100, "carbohydrates_100g")
 
     def test_save_data_with_carbohydrates_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value carbohydrates unit field if the field carbohydrates unit is
-        available in API response"""
+        available in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -461,9 +495,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.carbohydrates_unit, "carbohydrates_unit")
 
     def test_save_data_with_sugars_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value sugars serving field if the field sugars serving is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -483,9 +519,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.sugar, "sugars_serving")
 
     def test_save_data_with_sugars_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value sugars per 100 field if the field sugars 100g is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -505,9 +543,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.sugar_per100, "sugars_100g")
 
     def test_save_data_with_sugars_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value sugars unit field if the field sugars unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -527,9 +567,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.sugar_unit, "sugars_unit")
 
     def test_save_data_with_fiber_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fiber serving field if the field fiber serving is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -549,9 +591,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fiber, "fiber_serving")
 
     def test_save_data_with_fiber_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fiber per 100 field if the field fiber 100g is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -571,9 +615,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fiber_per100, "fiber_100g")
 
     def test_save_data_with_fiber_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value fiber unit field if the field fiber unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -593,9 +639,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.fiber_unit, "fiber_unit")
 
     def test_save_data_with_proteins_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value proteins serving field if the field proteins serving is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -615,9 +663,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.proteins, "proteins_serving")
 
     def test_save_data_with_proteins_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value proteins per 100 field if the field proteins 100g is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -637,9 +687,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.proteins_per100, "proteins_100g")
 
     def test_save_data_with_proteins_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value proteins unit field if the field proteins unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -659,9 +711,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.proteins_unit, "proteins_unit")
 
     def test_save_data_with_salt_serving(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value salt serving field if the field salt serving is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -681,9 +735,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.salt, "salt_serving")
 
     def test_save_data_with_salt_100(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value salt per 100 field if the field salt 100g is available
-        in API response"""
+        in API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",
@@ -703,9 +759,11 @@ class TestControllers(TestCase):
         self.assertTrue(nutrival.salt_per100, "salt_100g")
 
     def test_save_data_with_salt_unit(self):
-        """Verify that an item is created in database with a nutritional
+        """
+        Verify that an item is created in database with a nutritional
         value salt unit field if the field salt unit is available in
-        API response"""
+        API response
+        """
         mock_result = {"products": [
             {
                 "categories": "category",

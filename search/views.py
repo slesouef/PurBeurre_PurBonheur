@@ -6,14 +6,22 @@ from .models import Products, NutritionalValues
 
 
 def index(request):
+    """Site landing page"""
     return render(request, "search/index.html")
 
 
 def legal(request):
+    """Display legal information page"""
     return render(request, "search/legal.html")
 
 
 def search(request):
+    """
+    Display the product search results
+    The response must contain a title with the query term used for the search.
+    If the search is successful, a product and its substitutes are provided
+    in the response. Otherwise, an error is provided
+    """
     query = request.POST.get("query")
     context = {"title": "Résultat de la recherche {}".format(query)}
     try:
@@ -32,6 +40,12 @@ def search(request):
 
 
 def details(request, id):
+    """
+    Display the detailed information of a Product:
+        the product itself
+        the nutritional values associated with that product
+        the nutriscore image for this product's rating
+    """
     product = Products.objects.filter(id=id).first()
     nutrival = NutritionalValues.objects.filter(pid=id).first()
     nutriscore = f'/search/img/score/nutriscore-{product.rating}.svg'

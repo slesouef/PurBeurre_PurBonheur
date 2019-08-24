@@ -70,5 +70,5 @@ def get_products(category):
     :param category: category object from product search result
     :return: 6 product objects from category with highest rating
     """
-    products = Products.objects.filter(category=category).order_by('rating')[:6]
+    products = Products.objects.filter(category=category).order_by("rating")[:6]
     return products

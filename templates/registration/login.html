@@ -5,7 +5,8 @@
   <section class="page-section bg-bonbon" id="about">
     <div class="container">
       {% if form.errors %}
-         <p>Votre login et mot de passe ne correspondent pas. Merci de bien vouloir réessayer.</p>
+         <p>Votre login et mot de passe ne correspondent pas.
+            Merci de bien vouloir réessayer.</p>
       {% endif %}
 
       <form method="post" action="{% url 'login' %}">
@@ -20,12 +21,14 @@
             <td>{{ form.password }}</td>
           </tr>
         </table>
-
+        <br>
         <input type="submit" value="login">
         <input type="hidden" name="next" value="{{ next }}">
       </form>
-
-      <p><a href="{% url 'signup' %}">Création de compte</a></p>
+      <br>
+      <p>Pas encore de compte avec nous. Pas de problème, utilisez simplement
+      le lien suivant:</p>
+      <p><a class="h5" href="{% url 'signup' %}">Création de compte</a></p>
 
     </div>
   </section>

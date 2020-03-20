@@ -90,8 +90,8 @@ if os.environ.get('ENV') == 'TRAVIS':
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'offproducts',
-            'USER': 'travis',
-            'PASSWORD': 'travis',
+            'USER': 'cibuild',
+            'PASSWORD': 'cibuild',
             'HOST': 'localhost',
             'PORT': '5432',
             'TEST': {

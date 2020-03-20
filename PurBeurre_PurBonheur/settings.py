@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'PurBeurre_PurBonheur.wsgi.application'
 
 if os.environ.get('ENV') == 'PRODUCTION':
     DATABASES = {'default': dj_database_url.config(conn_max_age=500)}
-if os.environ.get('TRAVIS') == "TRUE":
+if os.environ.get('TRAVIS') == 'TRUE':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

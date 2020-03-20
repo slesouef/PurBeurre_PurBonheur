@@ -7,7 +7,13 @@ env:
   - DJANGO=2.2 DB=postgres
 # command to install dependencies
 install:
-  - pipenv install 
+  - pipenv install
+# setup database configuration
+before_script:
+  - psql -c "CREATE DATABASE offproducts;" -U postgres
+  - psql -c "CREATE USER cibuild PASSWORD 'cibuild';" -U postgres
+  - psql -c "ALTER USER cibuild CREATEDB;" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES on DATABASE offproducts to cibuild;" -U postgres
   # command to run tests
 script:
   - python manage.py test

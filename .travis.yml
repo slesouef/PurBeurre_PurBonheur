@@ -26,7 +26,6 @@ deploy:
       -in deploy_rsa.enc -out /tmp/deploy_rsa -d
     && chmod 600 /tmp/deploy_rsa
     && ssh-add /tmp/deploy_rsa
-    && git remote add deploy slesouef@51.159.66.3:~/django-web/PurBeurre_PurBonheur
-    && git push deploy HEAD:release/production
+    && scp -rp TRAVIS_BUILD_DIR/ slesouef@51.159.66.3:~/django-web/
   on:
     branch: release/production

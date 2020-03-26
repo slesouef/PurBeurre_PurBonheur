@@ -26,6 +26,6 @@ deploy:
       -in deploy_rsa.enc -out /tmp/deploy_rsa -d
     && chmod 600 /tmp/deploy_rsa
     && ssh-add /tmp/deploy_rsa
-    && scp -rp TRAVIS_BUILD_DIR/ slesouef@51.159.66.3:~/django-web/
+    && scp -rp TRAVIS_BUILD_DIR/slesouef/ slesouef@51.159.66.3:~/django-web/
   on:
     branch: release/production

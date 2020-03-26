@@ -6,7 +6,7 @@ services:
 env:
 - DJANGO=2.2 DB=postgres
 addons:
-  hosts: 51.159.66.3
+  ssh_known_hosts: 51.159.66.3
 install:
 - pipenv install
 before_script:

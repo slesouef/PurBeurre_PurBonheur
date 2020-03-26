@@ -27,6 +27,6 @@ deploy:
     && chmod 600 /tmp/deploy_rsa
     && ssh-add /tmp/deploy_rsa
     && git remote add deploy slesouef@51.159.66.3:~/django-web/
-    && git push deploy
+    && git push deploy HEAD:release/production
   on:
     branch: release/production

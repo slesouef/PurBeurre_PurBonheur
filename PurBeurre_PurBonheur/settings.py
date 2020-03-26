@@ -98,22 +98,10 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'offproducts',
-            'USER': 'sebastien',
-            'PASSWORD': 'sebastien',
+            'USER': 'pur_user',
+            'PASSWORD': 'xe)s5xA2]u5',
             'HOST': 'localhost',
-            'PORT': '5432',
-            'TEST': {
-                'NAME': 'mytestdatabase',
-            },
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'offproducts',
-        'USER': 'pur_user',
-        'PASSWORD': 'xe)s5xA2]u5',
-        'HOST': 'localhost',
-        'PORT': '',
+            'PORT': '',
         },
     }
 

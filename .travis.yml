@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.7"
+services:
+  - postgresql
+env:
+  - DJANGO=2.2 DB=postgres
+# command to install dependencies
+install:
+  - pipenv install 
+  # command to run tests
+script:
+  - python manage.py test

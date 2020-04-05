@@ -1,8 +1,12 @@
+import logging
+
 from django.shortcuts import render
 
 from .controllers import populate_database
 from .search_products import get_suggestions
 from .models import Products, NutritionalValues
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -39,15 +43,15 @@ def search(request):
     return render(request, "search/results_page.html", context)
 
 
-def details(request, id):
+def details(request, pid):
     """
     Display the detailed information of a Product:
         the product itself
         the nutritional values associated with that product
         the nutriscore image for this product's rating
     """
-    product = Products.objects.filter(id=id).first()
-    nutrival = NutritionalValues.objects.filter(pid=id).first()
+    product = Products.objects.filter(id=pid).first()
+    nutrival = NutritionalValues.objects.filter(pid=pid).first()
     nutriscore = f'/search/img/score/nutriscore-{product.rating}.svg'
     context = {
         "product": product,

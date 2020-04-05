@@ -184,6 +184,27 @@ if os.environ.get('ENV') == 'PRODUCTION':
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
+# logging configurations
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/tmp/django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
 sentry_sdk.init(
     dsn="https://ddcddb17ee7f46d883c04c841d9804ce@sentry.io/5189397",
     integrations=[DjangoIntegration()],

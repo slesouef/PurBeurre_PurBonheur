@@ -189,17 +189,28 @@ if os.environ.get('ENV') == 'PRODUCTION':
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'file': {
+            'format': '{asctime} - [{levelname}] - {module} {process:d} {thread:d} - {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
+            'formatter': 'file',
             'class': 'logging.FileHandler',
             'filename': '/tmp/django.log',
         },
     },
+    'root': {
+        'handlers': ['file'],
+        'level': 'INFO',
+    },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': True,
         },
     },

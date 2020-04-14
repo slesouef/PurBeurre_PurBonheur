@@ -64,5 +64,5 @@ def details(request, pid):
         "nutrival": nutrival,
         "nutriscore": nutriscore
     }
-    logger.info("product detail page requested: " + product)
+    logger.info("product detail page requested: " + product.name)
     return render(request, "search/details.html", context)

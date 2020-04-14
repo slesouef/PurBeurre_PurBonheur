@@ -11,11 +11,13 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     """Site landing page"""
+    logger.info("landing page requested")
     return render(request, "search/index.html")
 
 
 def legal(request):
     """Display legal information page"""
+    logger.info("legal page requested")
     return render(request, "search/legal.html")
 
 
@@ -28,18 +30,22 @@ def search(request):
     """
     query = request.POST.get("query")
     context = {"title": "Résultat de la recherche {}".format(query)}
+    logger.info("user search initiated - query term: " + query)
     try:
         result, products = get_suggestions(query)
         context["result"] = result
         context["products"] = products
+        logger.info("product found in database: " + query)
     except LookupError:
         try:
             populate_database(query)
             result, products = get_suggestions(query)
             context["result"] = result
             context["products"] = products
+            logger.info("product found on openfoodfacts: " + result)
         except (ValueError, LookupError):
             context["error"] = "Votre recherche n'a donné aucun résultats"
+            logger.info("user search yielded no results: " + query)
     return render(request, "search/results_page.html", context)
 
 
@@ -58,4 +64,5 @@ def details(request, pid):
         "nutrival": nutrival,
         "nutriscore": nutriscore
     }
+    logger.info("product detail page requested: " + product)
     return render(request, "search/details.html", context)

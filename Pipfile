@@ -18,6 +18,7 @@ openfoodfacts = {git = "https://github.com/openfoodfacts/openfoodfacts-python"}
 django-storages = "*"
 boto3 = "*"
 sentry-sdk = "==0.14.3"
+newrelic = "*"
 
 [requires]
 python_version = "3.7"

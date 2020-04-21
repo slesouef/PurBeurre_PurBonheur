@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -9,6 +11,8 @@ from .forms import SignUpForm
 from .models import MyUser
 from search.models import Products
 
+logger = logging.getLogger(__name__)
+
 
 @never_cache
 def signup(request):
@@ -19,6 +23,7 @@ def signup(request):
     session for the user's profile page
     """
     if request.user.is_authenticated:
+        logger.info("signup page requested for logged in user")
         return redirect("profile")
     else:
         if request.method == "POST":
@@ -32,9 +37,11 @@ def signup(request):
                 authenticated_user = authenticate(request, username=username,
                                                   password=raw_password)
                 login(request, authenticated_user)
+                logger.info("account creation successful")
                 return redirect("profile")
         else:
             form = SignUpForm()
+            logger.info("signup form requested")
         return render(request, "accounts/signup.html", {"form": form})
 
 
@@ -54,6 +61,7 @@ def profile(request):
     context["first_name"] = first_name
     context["email"] = user.email
     context["avatar"] = user.avatar
+    logger.info("profile page requested")
     return render(request, "accounts/profile.html", context)
 
 
@@ -76,8 +84,10 @@ def save_favorite(request):
             user.favorites.add(product)
             user.save()
             response = {"response": "OK"}
+        logger.info("new favorite saved")
         return JsonResponse(response)
     else:
+        logger.info("attempt to save a new favorite while not authenticated")
         raise PermissionDenied
 
 
@@ -97,4 +107,5 @@ def favorites(request):
     context["user_name"] = user.get_full_name
     context["favorites"] = favs
     context["avatar"] = user.avatar
+    logger.info("user favorites requested")
     return render(request, "accounts/favorites.html", context)

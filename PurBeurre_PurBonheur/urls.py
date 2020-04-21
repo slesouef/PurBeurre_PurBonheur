@@ -25,12 +25,14 @@ urlpatterns = [
     path('', search_views.index, name='index'),
     path('legal/', search_views.legal, name='legal'),
     path('search/', search_views.search, name='search'),
-    path('details/<int:id>/', search_views.details, name='details'),
-    path('accounts/login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    path('details/<int:pid>/', search_views.details, name='details'),
+    path('accounts/login/',
+         auth_views.LoginView.as_view(redirect_authenticated_user=True),
+         name='login'),
     path('accounts/signup/', account_views.signup, name='signup'),
     path('accounts/profile/', account_views.profile, name='profile'),
-    path('accounts/favorites/new/', account_views.save_favorite, name='save_favorite'),
+    path('accounts/favorites/new/',
+         account_views.save_favorite, name='save_favorite'),
     path('accounts/favorites/', account_views.favorites, name='favorites'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

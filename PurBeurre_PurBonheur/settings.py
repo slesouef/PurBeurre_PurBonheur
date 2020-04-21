@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import dj_database_url
+import sentry_sdk
+
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -180,3 +183,44 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+
+# logging configurations
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'file': {
+            'format': '{asctime} - [{levelname}] - {module} {process:d} {thread:d} - {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'formatter': 'file',
+            'class': 'logging.FileHandler',
+            'filename': '/tmp/django.log',
+        },
+    },
+    'root': {
+        'handlers': ['file'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
+
+sentry_sdk.init(
+    dsn="https://ddcddb17ee7f46d883c04c841d9804ce@sentry.io/5189397",
+    integrations=[DjangoIntegration()],
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)

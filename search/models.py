@@ -23,6 +23,7 @@ class Products(models.Model):
     rating = models.CharField(max_length=1)
     url = models.URLField()
     image = models.URLField(null=True)
+    code = models.BigIntegerField(null=True)
     category = models.ForeignKey("Categories", on_delete=models.CASCADE)
 
     def get_absolute_url(self):

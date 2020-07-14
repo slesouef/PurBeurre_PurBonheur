@@ -19,6 +19,7 @@ django-storages = "*"
 boto3 = "*"
 sentry-sdk = "==0.14.3"
 newrelic = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"

@@ -104,6 +104,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {}
             }
         ]}
@@ -125,6 +126,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {}
             }
         ]}
@@ -154,6 +156,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {}
             }
         ]}
@@ -176,6 +179,7 @@ class TestControllers(TestCase):
                 "nutrition_grade_fr": "e",
                 "url": "url",
                 "image_url": "image_url",
+                "code": "code",
                 "nutriments": {}
             }
         ]}
@@ -197,6 +201,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "serving_size": "serving_size",
                 "nutriments": {}
             }
@@ -220,6 +225,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "energy_serving": "energy_serving"
                 }
@@ -244,6 +250,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "energy_100g": "energy_100g"
                 }
@@ -268,6 +275,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "energy_unit": "energy_unit"
                 }
@@ -292,6 +300,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fat_serving": "fat_serving"
                 }
@@ -316,6 +325,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fat_100g": "fat_100g"
                 }
@@ -340,6 +350,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fat_unit": "fat_unit"
                 }
@@ -364,6 +375,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "saturated-fat_serving": "saturated-fat_serving"
                 }
@@ -388,6 +400,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "saturated-fat_100g": "saturated-fat_100g"
                 }
@@ -412,6 +425,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "saturated-fat_unit": "saturated-fat_unit"
                 }
@@ -436,6 +450,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "carbohydrates_serving": "carbohydrates_serving"
                 }
@@ -460,6 +475,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "carbohydrates_100g": "carbohydrates_100g"
                 }
@@ -484,6 +500,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "carbohydrates_unit": "carbohydrates_unit"
                 }
@@ -508,6 +525,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "sugars_serving": "sugars_serving"
                 }
@@ -532,6 +550,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "sugars_100g": "sugars_100g"
                 }
@@ -556,6 +575,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "sugars_unit": "sugars_unit"
                 }
@@ -580,6 +600,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fiber_serving": "fiber_serving"
                 }
@@ -604,6 +625,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fiber_100g": "fiber_100g"
                 }
@@ -628,6 +650,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "fiber_unit": "fiber_unit"
                 }
@@ -652,6 +675,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "proteins_serving": "proteins_serving"
                 }
@@ -676,6 +700,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "proteins_100g": "proteins_100g"
                 }
@@ -700,6 +725,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "proteins_unit": "proteins_unit"
                 }
@@ -724,6 +750,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "salt_serving": "salt_serving"
                 }
@@ -748,6 +775,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "salt_100g": "salt_100g"
                 }
@@ -772,6 +800,7 @@ class TestControllers(TestCase):
                 "quantity": "quantity",
                 "nutrition_grade_fr": "e",
                 "url": "url",
+                "code": "code",
                 "nutriments": {
                     "salt_unit": "salt_unit"
                 }

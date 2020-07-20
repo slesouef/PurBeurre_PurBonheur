@@ -86,8 +86,9 @@ def save_data(data):
         quantity = item["quantity"]
         rating = item["nutrition_grade_fr"]
         url = item["url"]
+        code = item["code"]
         p = Products(name=name, brand=brand, quantity=quantity,
-                     rating=rating, url=url, category=cat)
+                     rating=rating, url=url, code=code, category=cat)
         if "image_url" in item:
             image = item["image_url"]
             p.image = image

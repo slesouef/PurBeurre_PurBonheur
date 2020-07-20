@@ -42,7 +42,7 @@ def search(request):
             result, products = get_suggestions(query)
             context["result"] = result
             context["products"] = products
-            logger.info("product found on openfoodfacts: " + result)
+            logger.info("product found on openfoodfacts: " + query)
         except (ValueError, LookupError):
             context["error"] = "Votre recherche n'a donné aucun résultats"
             logger.info("user search yielded no results: " + query)

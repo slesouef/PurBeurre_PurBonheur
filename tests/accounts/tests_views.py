@@ -31,12 +31,13 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         """Test the signup process"""
         form_data = {"username": "test",
                      "first_name": "test",
+                     "last_name": "test",
                      "email": "test@test.com",
                      "password": "test"}
         response = self.client.post("/accounts/signup/", form_data)
         user = auth.get_user(self.client)
         new_entry = MyUser.objects.filter(username="test")
-        self.assertTrue(new_entry.exists)
+        self.assertTrue(len(new_entry) == 1)
         self.assertRedirects(response, "/accounts/profile/")
         self.assertTrue(user.is_authenticated)
 

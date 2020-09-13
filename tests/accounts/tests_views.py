@@ -27,11 +27,10 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         self.assertTemplateUsed(response, "search/search_form.html")
         self.assertTemplateUsed(response, "accounts/signup.html")
 
-    def test_signup(self):
+    def test_signup_mandatory_fields(self):
         """Test the signup process"""
         form_data = {"username": "test",
                      "first_name": "test",
-                     "last_name": "test",
                      "email": "test@test.com",
                      "password": "test"}
         response = self.client.post("/accounts/signup/", form_data)
@@ -104,7 +103,7 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         prod = Products.objects.create(category=cat, name="name")
         prod_id = prod.id
         response = self.client.post("/accounts/favorites/new/",
-                                   {"product_id": prod_id})
+                                    {"product_id": prod_id})
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, {"response": "OK"})
         favs = self.user.favorites.all()
@@ -120,7 +119,7 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         prod_id = prod.id
         self.user.favorites.add(prod)
         response = self.client.post("/accounts/favorites/new/",
-                                   {"product_id": prod_id})
+                                    {"product_id": prod_id})
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content,
                              {"error": "favorite already exists"})

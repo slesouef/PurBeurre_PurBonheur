@@ -109,3 +109,25 @@ def favorites(request):
     context["avatar"] = user.avatar
     logger.info("user favorites requested")
     return render(request, "accounts/favorites.html", context)
+
+
+@login_required
+def update(request):
+    """
+    Allow the user to update the account information
+    :param request:
+    :return:
+    """
+    if request.method == "POST":
+        form = SignUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            raw_password = form.cleaned_data.get("password")
+            user.set_password(raw_password)
+            user.save()
+            logger.info("account update successful")
+            return redirect("profile")
+    else:
+        form = SignUpForm()
+        logger.info("update form requested")
+    return render(request, "accounts/update.html", {"form": form})

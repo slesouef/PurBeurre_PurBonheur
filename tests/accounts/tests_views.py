@@ -62,6 +62,12 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         self.assertEqual(response.status_code, 403)
         self.assertTemplateUsed(response, "403.html")
 
+    def test_update_page_unauthenticated_user(self):
+        """Test that the update page redirects unauthenticated users to login"""
+        response = self.client.get("/accounts/update/")
+        self.assertRedirects(response,
+                             "/accounts/login/?next=/accounts/update/")
+
 
 class AuthenticatedAccountsViewsTestCases(TestCase):
     """
@@ -94,6 +100,14 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         self.assertTemplateUsed(response, "search/base.html")
         self.assertTemplateUsed(response, "search/search_form.html")
         self.assertTemplateUsed(response, "accounts/favorites.html")
+
+    def test_update_page_authenticated_user(self):
+        """Test that update page is displayed for authenticated users"""
+        response = self.client.get("/accounts/update/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "search/base.html")
+        self.assertTemplateUsed(response, "search/search_form.html")
+        self.assertTemplateUsed(response, "accounts/update.html")
 
     def test_save_favorite_new(self):
         """

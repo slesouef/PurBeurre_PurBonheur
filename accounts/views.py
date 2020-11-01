@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
 
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateForm
 from .models import MyUser
 from search.models import Products
 
@@ -57,8 +57,8 @@ def profile(request):
         "avatar": False,
     }
     user = request.user
-    first_name = user.get_short_name()
-    context["first_name"] = first_name
+    context["username"] = user.username
+    context["fullname"] = user.get_full_name()
     context["email"] = user.email
     context["avatar"] = user.avatar
     logger.info("profile page requested")
@@ -109,3 +109,33 @@ def favorites(request):
     context["avatar"] = user.avatar
     logger.info("user favorites requested")
     return render(request, "accounts/favorites.html", context)
+
+
+@login_required
+def update(request):
+    """
+    Allow the user to update the account information
+    """
+    if request.method == "POST":
+        form = UpdateForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            if form.data["first_name"] != "":
+                user.first_name = form.data["first_name"]
+                logger.info(f"user {user.username} updates first name")
+            if form.data["last_name"] != "":
+                user.last_name = form.data["last_name"]
+                logger.info(f"user {user.username} updates last name")
+            if form.data["email"] != "":
+                user.email = form.data["email"]
+                logger.info(f"user {user.username} updates email")
+            if form.files["avatar"] != "":
+                user.avatar = form.files["avatar"]
+                logger.info(f"user {user.username} updates avatar")
+            user.save()
+            logger.info(f"user {user.username} information update successful")
+            return redirect("profile")
+    else:
+        form = UpdateForm()
+        logger.info("update form requested")
+    return render(request, "accounts/update.html", {"form": form})

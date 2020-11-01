@@ -1,0 +1,28 @@
+{% extends 'search/base.html' %}
+
+{% block content %}
+
+  <section class="page-section bg-rooibos" id="update">
+    <div class="container ">
+      <form class='col-4' method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class='form-group'>
+            <label for='{{ field.label }}' class='control-label'>
+              {{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <small class='form-text' style="color: grey"
+              >{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class='form-text' style="color: red">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <button type='submit' class='btn btn-outline-primary'>Mettre a jour</button>
+      </form>
+    </div>
+  </section>
+
+{% endblock %}

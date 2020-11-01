@@ -10,7 +10,7 @@
           <h1 class="text-uppercase text-white font-weight-bold">Ahoy!</h1>
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <p class="text-white-75 font-weight-light mb-5">{{ first_name }}</p>
+          <p class="text-white-75 font-weight-light mb-5">{{ username }}</p>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
           <h1 class="text-uppercase text-white font-weight-bold">Ahoy!</h1>
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <p class="text-white-75 font-weight-light mb-5">{{ first_name }}</p>
+          <p class="text-white-75 font-weight-light mb-5">{{ username }}</p>
         </div>
       </div>
     </div>
@@ -32,8 +32,17 @@
 
   <section class="page-section bg-bonbon" id="about">
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center m-2" style="font-size: x-large">
+        {{ fullname }}
+      </div>
+      <div class="row justify-content-center m-2" style="font-size: x-large">
         {{ email }}
+      </div>
+    </div>
+    <div class="container">
+      <div class="row justify-content-center mt-5">
+        <button type="button" onclick="location.href='{% url 'update' %}'" class="btn btn-outline-dark btn-link justify-content-center">
+          Mettre le profile a jour</button>
       </div>
     </div>
   </section>

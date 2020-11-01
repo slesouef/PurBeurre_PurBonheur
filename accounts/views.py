@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 from django.http import JsonResponse
 from django.core.exceptions import PermissionDenied
 
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateForm
 from .models import MyUser
 from search.models import Products
 
@@ -115,19 +115,27 @@ def favorites(request):
 def update(request):
     """
     Allow the user to update the account information
-    :param request:
-    :return:
     """
     if request.method == "POST":
-        form = SignUpForm(request.POST, request.FILES)
+        form = UpdateForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            raw_password = form.cleaned_data.get("password")
-            user.set_password(raw_password)
+            user = request.user
+            if form.data["first_name"] != "":
+                user.first_name = form.data["first_name"]
+                logger.info(f"user {user.username} updates first name")
+            if form.data["last_name"] != "":
+                user.last_name = form.data["last_name"]
+                logger.info(f"user {user.username} updates last name")
+            if form.data["email"] != "":
+                user.email = form.data["email"]
+                logger.info(f"user {user.username} updates email")
+            if form.files["avatar"] != "":
+                user.avatar = form.files["avatar"]
+                logger.info(f"user {user.username} updates avatar")
             user.save()
-            logger.info("account update successful")
+            logger.info(f"user {user.username} information update successful")
             return redirect("profile")
     else:
-        form = SignUpForm()
+        form = UpdateForm()
         logger.info("update form requested")
     return render(request, "accounts/update.html", {"form": form})

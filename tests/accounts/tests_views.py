@@ -1,8 +1,19 @@
 from django.test import TestCase
 from django.contrib import auth
+from io import BytesIO
+from PIL import Image
 
 from accounts.models import MyUser
 from search.models import Products, Categories
+
+
+def create_test_image():
+    file = BytesIO()
+    image = Image.new("RGBA", size=(50, 50), color=(155, 0, 0))
+    image.save(file, "png")
+    file.name = "test.png"
+    file.seek(0)
+    return file
 
 
 class UnauthenticatedAccountsViewsTestCases(TestCase):
@@ -38,6 +49,27 @@ class UnauthenticatedAccountsViewsTestCases(TestCase):
         user = auth.get_user(self.client)
         new_entry = MyUser.objects.filter(username="test")
         self.assertTrue(len(new_entry) == 1)
+        self.assertEqual(new_entry[0].get_full_name(), "test test")
+        self.assertEqual(new_entry[0].email, "test@test.com")
+        self.assertFalse(new_entry[0].avatar)
+        self.assertRedirects(response, "/accounts/profile/")
+        self.assertTrue(user.is_authenticated)
+
+    def test_signup_optional_fields(self):
+        """Test the signup process with an image"""
+        form_data = {"username": "test",
+                     "first_name": "test",
+                     "last_name": "test",
+                     "email": "test@test.com",
+                     "password": "test",
+                     "avatar": create_test_image()}
+        response = self.client.post("/accounts/signup/", form_data)
+        user = auth.get_user(self.client)
+        new_entry = MyUser.objects.filter(username="test")
+        self.assertTrue(len(new_entry) == 1)
+        self.assertEqual(new_entry[0].get_full_name(), "test test")
+        self.assertEqual(new_entry[0].email, "test@test.com")
+        self.assertTrue(new_entry[0].avatar)
         self.assertRedirects(response, "/accounts/profile/")
         self.assertTrue(user.is_authenticated)
 
@@ -145,3 +177,19 @@ class AuthenticatedAccountsViewsTestCases(TestCase):
         """Test that the logout link redirects ton index page"""
         response = self.client.get("/logout/")
         self.assertRedirects(response, "/")
+
+    def test_update_user_information(self):
+        """Test that the user information can be updated with the update page"""
+        form_data = {"first_name": "test2",
+                     "last_name": "test2",
+                     "email": "test@email.com",
+                     "avatar": create_test_image()}
+        original_entry = MyUser.objects.filter(username="test")
+        original_avatar = original_entry[0].avatar
+        response = self.client.post("/accounts/update/", form_data)
+        updated_entry = MyUser.objects.filter(username="test")
+        self.assertTrue(len(updated_entry) == 1)
+        self.assertEqual(updated_entry[0].get_full_name(), "test2 test2")
+        self.assertEqual(updated_entry[0].email, "test@email.com")
+        self.assertTrue(updated_entry[0].avatar != original_avatar)
+        self.assertRedirects(response, "/accounts/profile/")

@@ -149,7 +149,7 @@ STATIC_URL = '/static/'
 
 # Media files (user avatars)
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.dirname('/var/www/purbeurre.com/media/')
 MEDIA_URL = '/media/'
 
 # logging configurations

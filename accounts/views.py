@@ -129,7 +129,7 @@ def update(request):
             if form.data["email"] != "":
                 user.email = form.data["email"]
                 logger.info(f"user {user.username} updates email")
-            if form.files["avatar"] != "":
+            if form.files:
                 user.avatar = form.files["avatar"]
                 logger.info(f"user {user.username} updates avatar")
             user.save()

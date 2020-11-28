@@ -10,6 +10,9 @@ install:
   - pipenv install
 # setup database configuration
 before_script:
+  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-linux64.tar.gz"
+  - tar xfz geckodriver-v0.28.0-linux64.tar.gz
+  - sudo mv geckodriver /usr/local/bin
   - psql -c "CREATE DATABASE offproducts;" -U postgres
   - psql -c "CREATE USER cibuild PASSWORD 'cibuild';" -U postgres
   - psql -c "ALTER USER cibuild CREATEDB;" -U postgres

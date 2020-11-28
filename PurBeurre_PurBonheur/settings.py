@@ -148,9 +148,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
 
 # Media files (user avatars)
-
-MEDIA_ROOT = os.path.dirname('/var/www/purbeurre.com/media/')
-MEDIA_URL = '/media/'
+if os.environ.get('ENV') == 'TRAVIS':
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_ROOT = os.path.dirname('/var/www/purbeurre.com/media/')
+    MEDIA_URL = '/media/'
 
 # logging configurations
 

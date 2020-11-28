@@ -34,5 +34,6 @@ urlpatterns = [
     path('accounts/favorites/new/',
          account_views.save_favorite, name='save_favorite'),
     path('accounts/favorites/', account_views.favorites, name='favorites'),
+    path('accounts/update/', account_views.update, name='update'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

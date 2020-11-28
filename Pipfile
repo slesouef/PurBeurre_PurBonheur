@@ -20,6 +20,7 @@ boto3 = "*"
 sentry-sdk = "==0.16.3"
 newrelic = "*"
 sqlalchemy = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.7"

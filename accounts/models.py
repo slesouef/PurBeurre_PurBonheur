@@ -18,8 +18,10 @@ class MyUser(AbstractUser):
     The project user can add a picture at account creation
     The project user can associate multiple Products as favorites
     """
-    first_name = models.CharField(blank=False, max_length=30,
+    first_name = models.CharField(blank=False, max_length=150,
                                   verbose_name="first name")
+    last_name = models.CharField(blank=False, max_length=150,
+                                 verbose_name="last name")
     email = models.EmailField(blank=False, max_length=254,
                               verbose_name="email address")
     avatar = models.ImageField(blank=True, upload_to=user_directory_path)
